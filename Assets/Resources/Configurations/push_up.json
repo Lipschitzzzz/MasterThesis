@@ -1,0 +1,11 @@
+{
+    "poseIndex": -1, 
+    "poseName": "plank", 
+    "poseDetectValueArray": 
+    [
+        {"type": "angle", "points": "5-7-9", "value": 30}, 
+        {"type": "angle", "points": "6-8-10", "value": 30}, 
+        {"type": "horizontal", "points": "5-11-13-15", "value": 0.005}
+        {"type": "horizontal", "points": "6-12-14-16", "value": 0.005}
+    ]
+}

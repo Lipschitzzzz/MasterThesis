@@ -1,0 +1,22 @@
+{
+  "poseIndex": 0,
+  "poseName": "ArmPrayerStretch",
+  "poseDetectValueArray":
+  [
+    {
+      "type": "angle",
+      "points": "5-7-9",
+      "value": 60
+    },
+    {
+      "type": "angle",
+      "points": "6-8-10",
+      "value": 60
+    },
+    {
+      "type": "x_coordinate_tolerance",
+      "points": "9-10",
+      "value": 0.2
+    }
+  ]
+}
