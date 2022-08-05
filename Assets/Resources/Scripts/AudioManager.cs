@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Sprites;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
     public AudioClip[] audioClips;
+    public Sprite[] muteUnmuteSprites;
+    public GameObject muteUnmuteButton;
+
+    public bool isMuted;
 
     private int currentPlayingIndex;
 
@@ -68,6 +74,22 @@ public class AudioManager : MonoBehaviour
     {
         audioSource.clip = audioClips[currentPlayingIndex];
         audioSource.Play();
+    }
+
+    public void Mute()
+    {
+        if (audioSource.mute)
+        {
+            muteUnmuteButton.GetComponent<Image>().sprite = muteUnmuteSprites[1];
+            audioSource.mute = !audioSource.mute;
+            isMuted = true;
+        }
+        else
+        {
+            muteUnmuteButton.GetComponent<Image>().sprite = muteUnmuteSprites[0];
+            audioSource.mute = !audioSource.mute;
+            isMuted = false;
+        }
     }
 
 }

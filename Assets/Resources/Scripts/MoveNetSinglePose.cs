@@ -42,7 +42,7 @@ public class MoveNetSinglePose : MonoBehaviour
 
         // string filePath = Directory.GetCurrentDirectory() + @"\Assets\Resources\TFLiteModels\" + fileName;
         string filePath = Application.streamingAssetsPath + "/" + fileName;
-        Debug.Log(filePath);
+        // Debug.Log(filePath);
         moveNet = new MoveNet(filePath);
         // utilities = new Utilities();
         GameObject gameObject = new GameObject("Utilities");

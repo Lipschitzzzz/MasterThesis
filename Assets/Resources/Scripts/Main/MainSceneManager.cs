@@ -15,6 +15,8 @@ public class MainSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioManager = GameObject.Find("AudioManager");
+        audioManager.GetComponent<AudioManager>().muteUnmuteButton = GameObject.Find("Mute");
         canvas.SetActive(false);
         audioManager.SetActive(false);
         startTime = Time.time;
@@ -53,13 +55,19 @@ public class MainSceneManager : MonoBehaviour
 
     }
 
+    public void Mute()
+    {
+        audioManager.GetComponent<AudioManager>().Mute();
+    }
+
     public void ClassicStart()
     {
         SceneManager.LoadScene("Classic");
     }
     public void SpecialStart()
     {
-        SceneManager.LoadScene("Special");
+        Debug.Log("The Special Scene is updating");
+        // SceneManager.LoadScene("Special");
     }
 
     public void GameQuit()
