@@ -1,0 +1,27 @@
+{
+    "poseIndex": 1,
+    "poseName": "LatissimusDorsiMuscleStretch",
+    "poseDetectValueArray":
+    [
+      {
+        "type": "angle",
+        "points": "5-7-9",
+        "value": 90
+      },
+      {
+        "type": "angle",
+        "points": "7-5-6",
+        "value": 170
+      },
+      {
+        "type": "angle",
+        "points": "6-8-10",
+        "value": 170
+      },
+      {
+        "type": "angle",
+        "points": "12-6-8",
+        "value": 170
+      }
+    ]
+  }

@@ -1,0 +1,17 @@
+{
+    "poseIndex": 2,
+    "poseName": "UpperTrapStretchRight",
+    "poseDetectValueArray":
+    [
+      {
+        "type": "angle",
+        "points": "6-8-10",
+        "value": 90
+      },
+      {
+        "type": "angle",
+        "points": "5-7-9",
+        "value": 180
+      }
+    ]
+  }
