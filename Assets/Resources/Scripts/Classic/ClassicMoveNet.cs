@@ -13,8 +13,6 @@ public class ClassicMoveNet : MoveNetSinglePose
     public string jsonNameUpperTrapStretchRight;
     public string jsonNameNeckIsometricExercise;
 
-    public GameObject test;
-
     private string currentPoseName;
     private int currentPoseIndex;
     // private float timeLine1 = 0.0f;
@@ -30,7 +28,7 @@ public class ClassicMoveNet : MoveNetSinglePose
     new void Start()
     {
         base.Start();
-        // playerInfo = GameObject.Find("Player Info").GetComponent<PlayerInfo>();
+        playerInfo = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
         poseConfigurations = new List<PoseConfigurations>();
         currentPoseConfiguration = new PoseConfigurations();
 
@@ -57,8 +55,8 @@ public class ClassicMoveNet : MoveNetSinglePose
     void Update()
     {
         results = moveNet.GetResults();
-        DrawResult(results);
-        // PoseEstimation();
+        // DrawResult(results);
+        PoseEstimation();
     }
 
     new void OnDestroy()
@@ -139,12 +137,40 @@ public class ClassicMoveNet : MoveNetSinglePose
     {
         if (results[9].confidence > 0.3f && results[10].confidence > 0.3f)
         {
-            if (results[9].y < results[5].y || results[9].y < results[6].y || results[10].y < results[5].y || results[10].y < results[6].y)
+            foreach (List<int> i in poseConfigurations[0].verticalRelation.Keys)
             {
-                draw.color = Color.red;
-                DrawResult(results);
-                return false;
+                float value = float.Parse(poseConfigurations[0].verticalRelation[i]);
+                if(value == 0)
+                {
+                    // i[0].y should be < i[1].y but we only need the wrong case to visualization.
+                    if (results[i[0]].y > results[i[1]].y)
+                    {
+                        draw.color = Color.red;
+                        DrawResult(results);
+                        return false;
+                    }
+                }
+                else if(value == 1)
+                {
+                    // i[0].y should be > i[1].y but we only need the wrong case to visualization.
+                    if (results[i[0]].y < results[i[1]].y)
+                    {
+                        draw.color = Color.red;
+                        DrawResult(results);
+                        return false;
+                    }
+                }
+                else
+                {
+                    Debug.Log("verticalRelation value error");
+                }
             }
+            //if (results[9].y < results[5].y || results[9].y < results[6].y || results[10].y < results[5].y || results[10].y < results[6].y)
+            //{
+            //    draw.color = Color.red;
+            //    DrawResult(results);
+            //    return false;
+            //}
         }
         List<bool> matched = new List<bool>();
 
@@ -162,35 +188,39 @@ public class ClassicMoveNet : MoveNetSinglePose
             // proportion = distance(line0 / line1)
             float proportion = float.Parse(poseConfigurations[0].xRelativeDistance[i]);
 
-            Debug.Log(pointIndex0.ToString() + ' ' + pointIndex1.ToString() + ' ' + 
-                pointIndex2.ToString() + ' ' + pointIndex3.ToString() + ' ' + proportion.ToString());
+            // Debug.Log(pointIndex0.ToString() + ' ' + pointIndex1.ToString() + ' ' + 
+            //     pointIndex2.ToString() + ' ' + pointIndex3.ToString() + ' ' + proportion.ToString());
 
             if (results[pointIndex0].confidence > 0.3f && results[pointIndex1].confidence > 0.3f && results[pointIndex2].confidence > 0.3f && results[pointIndex3].confidence > 0.3f)
             {
                 float line0 = Mathf.Abs(results[pointIndex0].x - results[pointIndex1].x);
                 float line1 = Mathf.Abs(results[pointIndex2].x - results[pointIndex3].x);
 
-                float relativeDistance = line0 / line1;
-                // distance 1 - distance 2 
-                float x_normalization = Mathf.Abs(relativeDistance - proportion) / (proportion - 0);
+                // float relativeDistance = line0 / line1;
+                // distance 1 - distance 2
+                float tolerance = line1 * proportion;
+
+                // float x_normalization = Mathf.Abs(relativeDistance - proportion) / (proportion - 0);
 
                 Color color = new Color(1.0f, 0.0f, 0.0f);
-                color = new Color(x_normalization, 1 - x_normalization, 0);
 
-                draw.color = color;
-                MoveNet.Result[] line = new MoveNet.Result[2];
-                line[0] = results[pointIndex0];
-                line[1] = results[pointIndex1];
-                DrawLine(line);
-
-                if (x_normalization <= 0.5)
+                if (line0 < tolerance)
                 {
+                    color = new Color(0.0f, 1.0f, 0.0f);
                     matched.Add(true);
                 }
                 else
                 {
                     matched.Add(false);
                 }
+                // color = new Color(x_normalization, 1 - x_normalization, 0);
+
+                draw.color = color;
+                MoveNet.Result[] line = new MoveNet.Result[2];
+                line[0] = results[pointIndex0];
+                line[1] = results[pointIndex1];
+                DrawLine(line);
+                
             }
             else
             {
@@ -212,34 +242,37 @@ public class ClassicMoveNet : MoveNetSinglePose
             // proportion = distance(line0 / line1)
             float proportion = float.Parse(poseConfigurations[0].yRelativeDistance[i]);
 
-            Debug.Log(pointIndex0.ToString() + ' ' + pointIndex1.ToString() + ' ' +
-                pointIndex2.ToString() + ' ' + pointIndex3.ToString() + ' ' + proportion.ToString());
+            // Debug.Log(pointIndex0.ToString() + ' ' + pointIndex1.ToString() + ' ' +
+            //     pointIndex2.ToString() + ' ' + pointIndex3.ToString() + ' ' + proportion.ToString());
 
             if (results[pointIndex0].confidence > 0.3f && results[pointIndex1].confidence > 0.3f && results[pointIndex2].confidence > 0.3f && results[pointIndex3].confidence > 0.3f)
             {
                 float line0 = Mathf.Abs(results[pointIndex0].y - results[pointIndex1].y);
                 float line1 = Mathf.Abs(results[pointIndex2].y - results[pointIndex3].y);
 
-                float relativeDistance = line0 / line1;
-                // distance 1 - distance 2 
-                float y_normalization = Mathf.Abs(relativeDistance - proportion) / (proportion - 0);
-
+                float tolerance = line1 * proportion;
                 Color color = new Color(1.0f, 0.0f, 0.0f);
-                color = new Color(y_normalization, 1 - y_normalization, 0);
-
-                draw.color = color;
-                MoveNet.Result[] line = new MoveNet.Result[2];
-                line[0] = results[pointIndex0];
-                line[1] = results[pointIndex1];
-
-                if (y_normalization <= 0.5)
+                if (line0 < tolerance)
                 {
+                    color = new Color(0.0f, 1.0f, 0.0f);
                     matched.Add(true);
                 }
                 else
                 {
                     matched.Add(false);
                 }
+                // float relativeDistance = line0 / line1;
+                // distance 1 - distance 2 
+                // float y_normalization = Mathf.Abs(relativeDistance - proportion) / (proportion - 0);
+
+                // color = new Color(y_normalization, 1 - y_normalization, 0);
+
+                draw.color = color;
+                MoveNet.Result[] line = new MoveNet.Result[2];
+                line[0] = results[pointIndex0];
+                line[1] = results[pointIndex1];
+
+                
             }
             else
             {
@@ -248,6 +281,7 @@ public class ClassicMoveNet : MoveNetSinglePose
         }
 
         // xCoordinateTolerance
+        #region xCoordinateTolerance
         foreach (List<int> i in poseConfigurations[0].xCoordinateTolerance.Keys)
         {
             int pointIndex0 = i[0];
@@ -284,8 +318,10 @@ public class ClassicMoveNet : MoveNetSinglePose
                 matched.Add(false);
             }
         }
+        #endregion
 
         // yCoordinateTolerance
+        #region yCoordinateTolerance
         foreach (List<int> i in poseConfigurations[0].yCoordinateTolerance.Keys)
         {
             int pointIndex0 = i[0];
@@ -322,6 +358,8 @@ public class ClassicMoveNet : MoveNetSinglePose
                 matched.Add(false);
             }
         }
+        #endregion
+
 
         // angle
         foreach (List<int> i in poseConfigurations[0].angles.Keys)
@@ -333,7 +371,7 @@ public class ClassicMoveNet : MoveNetSinglePose
 
             // angle between point0 point1 point2
             float value = float.Parse(poseConfigurations[0].angles[i]);
-            Debug.Log(pointIndex0.ToString() + ' ' + pointIndex1.ToString() + ' ' + pointIndex2.ToString() + ' ' + value.ToString());
+            // Debug.Log(pointIndex0.ToString() + ' ' + pointIndex1.ToString() + ' ' + pointIndex2.ToString() + ' ' + value.ToString());
             if (results[pointIndex0].confidence > 0.3f && results[pointIndex1].confidence > 0.3f && results[pointIndex2].confidence > 0.3f)
             {
                 MoveNet.Result[] angle = new MoveNet.Result[3];
@@ -370,6 +408,8 @@ public class ClassicMoveNet : MoveNetSinglePose
             }
         }
         
+        // ensure all the actions matched
+        
         if(matched.Count == 0)
         {
             return false;
@@ -390,12 +430,40 @@ public class ClassicMoveNet : MoveNetSinglePose
     {
         if (results[10].confidence > 0.3f && results[6].confidence > 0.3f)
         {
-            if (results[10].x < results[6].x)
+            foreach (List<int> i in poseConfigurations[0].horizontalRelation.Keys)
             {
-                draw.color = Color.red;
-                DrawResult(results);
-                return false;
+                float value = float.Parse(poseConfigurations[0].horizontalRelation[i]);
+                if (value == 0)
+                {
+                    // i[0].x should be < i[1].x but we only need the wrong case to visualization.
+                    if (results[i[0]].x > results[i[1]].x)
+                    {
+                        draw.color = Color.red;
+                        DrawResult(results);
+                        return false;
+                    }
+                }
+                else if (value == 1)
+                {
+                    // i[0].x should be > i[1].x but we only need the wrong case to visualization.
+                    if (results[i[0]].x < results[i[1]].x)
+                    {
+                        draw.color = Color.red;
+                        DrawResult(results);
+                        return false;
+                    }
+                }
+                else
+                {
+                    Debug.Log("horizontalRelation value error");
+                }
             }
+            //if (results[10].x < results[6].x)
+            //{
+            //    draw.color = Color.red;
+            //    DrawResult(results);
+            //    return false;
+            //}
         }
         List<bool> matched = new List<bool>();
 
@@ -536,12 +604,68 @@ public class ClassicMoveNet : MoveNetSinglePose
     {
         if (results[10].confidence > 0.3f && results[8].confidence > 0.3f && results[6].confidence > 0.3f)
         {
-            if (results[8].y > results[6].y || results[10].x < results[8].x)
+            foreach (List<int> i in poseConfigurations[0].horizontalRelation.Keys)
             {
-                draw.color = Color.red;
-                DrawResult(results);
-                return false;
+                float value = float.Parse(poseConfigurations[0].horizontalRelation[i]);
+                if (value == 0)
+                {
+                    // i[0].x should be < i[1].x but we only need the wrong case to visualization.
+                    if (results[i[0]].x > results[i[1]].x)
+                    {
+                        draw.color = Color.red;
+                        DrawResult(results);
+                        return false;
+                    }
+                }
+                else if (value == 1)
+                {
+                    // i[0].x should be > i[1].x but we only need the wrong case to visualization.
+                    if (results[i[0]].x < results[i[1]].x)
+                    {
+                        draw.color = Color.red;
+                        DrawResult(results);
+                        return false;
+                    }
+                }
+                else
+                {
+                    Debug.Log("horizontalRelation value error");
+                }
             }
+            foreach (List<int> i in poseConfigurations[0].verticalRelation.Keys)
+            {
+                float value = float.Parse(poseConfigurations[0].verticalRelation[i]);
+                if (value == 0)
+                {
+                    // i[0].x should be < i[1].x but we only need the wrong case to visualization.
+                    if (results[i[0]].x > results[i[1]].x)
+                    {
+                        draw.color = Color.red;
+                        DrawResult(results);
+                        return false;
+                    }
+                }
+                else if (value == 1)
+                {
+                    // i[0].x should be > i[1].x but we only need the wrong case to visualization.
+                    if (results[i[0]].x < results[i[1]].x)
+                    {
+                        draw.color = Color.red;
+                        DrawResult(results);
+                        return false;
+                    }
+                }
+                else
+                {
+                    Debug.Log("horizontalRelation value error");
+                }
+            }
+            //if (results[8].y > results[6].y || results[10].x < results[8].x)
+            //{
+            //    draw.color = Color.red;
+            //    DrawResult(results);
+            //    return false;
+            //}
         }
         List<bool> matched = new List<bool>();
 

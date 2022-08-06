@@ -255,9 +255,27 @@ public class MoveNetSinglePose : MonoBehaviour
                 }
                 temPoseConfigurations.yRelativeDistance.Add(temp, jsonSettings[k + 2]);
             }
+            else if (jsonSettings[k] == "vertical")
+            {
+                List<int> temp = new List<int>();
+                foreach (var point_index in jsonSettings[k + 1].Split('-'))
+                {
+                    temp.Add(int.Parse(point_index));
+                }
+                temPoseConfigurations.verticalRelation.Add(temp, jsonSettings[k + 2]);
+            }
+            else if (jsonSettings[k] == "horizontal")
+            {
+                List<int> temp = new List<int>();
+                foreach (var point_index in jsonSettings[k + 1].Split('-'))
+                {
+                    temp.Add(int.Parse(point_index));
+                }
+                temPoseConfigurations.horizontalRelation.Add(temp, jsonSettings[k + 2]);
+            }
             else
             {
-                Debug.Log("unknown type of poseDetectValueArray");
+                Debug.Log("unknown type of poseDetectValueArray: " + jsonSettings[k]);
             }
         }
         poseConfigurations.Add(temPoseConfigurations);

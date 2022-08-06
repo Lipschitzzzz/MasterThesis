@@ -1507,6 +1507,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 728771393308179751, guid: df0f5190424654e4f8b970740da394a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 728771393308179768, guid: df0f5190424654e4f8b970740da394a0,
+        type: 3}
+      propertyPath: Mute
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 728771393308179768, guid: df0f5190424654e4f8b970740da394a0,
+        type: 3}
+      propertyPath: BypassEffects
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 728771393308179769, guid: df0f5190424654e4f8b970740da394a0,
         type: 3}
       propertyPath: muteUnmuteButton
