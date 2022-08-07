@@ -16,16 +16,46 @@
         "comment": "the angle between 5-7-9 should be close to 180 degree"
       },
       {
+        "type": "angle",
+        "points": "6-5-7",
+        "value": 100,
+        "comment": "the angle between 6-5-7 should be close to 100 degree"
+      },
+      {
         "type": "vertical",
-        "points": "6-8",
+        "points": "8-6",
         "value": 0,
-        "comment": "the y coordinate of point 6 should be < (>) the y coordinate of point 8 because of the value = 0 (1)"
+        "comment": "the y coordinate of point 8 should be over (under) the y coordinate of point 6 because of the value = 0 (1)"
       },
       {
         "type": "horizontal",
+        "points": "8-6",
+        "value": 0,
+        "comment": "the x coordinate of point 8 should be left (right) the x coordinate of point 6 because of the value = 0 (1)"
+      },
+      {
+        "type": "vertical",
         "points": "10-8",
         "value": 0,
-        "comment": "the x coordinate of point 10 should be < (>) the x coordinate of point 8 because of the value = 0 (1)"
+        "comment": "the y coordinate of point 10 should be over (under) the y coordinate of point 8 because of the value = 0 (1)"
+      },
+      {
+        "type": "horizontal",
+        "points": "8-10",
+        "value": 0,
+        "comment": "the x coordinate of point 6 should be left (right) the x coordinate of point 10 because of the value = 0 (1)"
+      },
+      {
+        "type": "horizontal",
+        "points": "6-10",
+        "value": 0,
+        "comment": "the x coordinate of point 6 should be left (right) the x coordinate of point 10 because of the value = 0 (1)"
+      },
+      {
+        "type": "vertical",
+        "points": "5-7",
+        "value": 0,
+        "comment": "the y coordinate of point 5 should be over (under) the x coordinate of point 7 because of the value = 0 (1)"
       }
     ]
   }

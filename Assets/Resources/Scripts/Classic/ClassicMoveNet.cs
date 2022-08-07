@@ -44,11 +44,11 @@ public class ClassicMoveNet : MoveNetSinglePose
             Debug.Log("test: " + test);
         }
 
-        StartCoroutine(RandomPoseFigure());
+        // StartCoroutine(RandomPoseFigure());
         ReadJson(poseConfigurations, jsonNameArmPrayerStretch);
         ReadJson(poseConfigurations, jsonNameLatissimusDorsiMuscleStretch);
         ReadJson(poseConfigurations, jsonNameUpperTrapStretchRight);
-        ReadJson(poseConfigurations, jsonNameNeckIsometricExercise);
+        // ReadJson(poseConfigurations, jsonNameNeckIsometricExercise);
     }
 
     // Update is called once per frame
@@ -73,6 +73,16 @@ public class ClassicMoveNet : MoveNetSinglePose
         results = moveNet.GetResults();
     }
 
+    public void NextPoseFigure()
+    {
+        currentPoseIndex += 1;
+        if (currentPoseIndex == textures.Count)
+        {
+            currentPoseIndex = 0;
+        }
+        figure.GetComponent<RawImage>().texture = textures[currentPoseIndex];
+    }
+
     private IEnumerator RandomPoseFigure()
     {
         int index = 0;
@@ -86,7 +96,7 @@ public class ClassicMoveNet : MoveNetSinglePose
             figure.GetComponent<RawImage>().texture = textures[index];
             currentPoseIndex = index;
             index += 1;
-            yield return new WaitForSeconds(60.0f);
+            yield return new WaitForSeconds(20.0f);
         }
     }
 
@@ -104,10 +114,14 @@ public class ClassicMoveNet : MoveNetSinglePose
         // neck_isometric_exercise
         else if (currentPoseIndex == 1)
         {
-            matched = ArmPrayerStretch();
+            matched = LatissimusDorsiMuscleStretch();
 
         }
+        else if (currentPoseIndex == 2)
+        {
+            matched = UpperTrapStretchRight();
 
+        }
         // add by times, 1 time = 70
         /*
         if (matched)
@@ -142,7 +156,7 @@ public class ClassicMoveNet : MoveNetSinglePose
                 float value = float.Parse(poseConfigurations[0].verticalRelation[i]);
                 if(value == 0)
                 {
-                    // i[0].y should be < i[1].y but we only need the wrong case to visualization.
+                    // i[0].y should be over i[1].y but we only need the wrong case to visualization.
                     if (results[i[0]].y > results[i[1]].y)
                     {
                         draw.color = Color.red;
@@ -152,7 +166,7 @@ public class ClassicMoveNet : MoveNetSinglePose
                 }
                 else if(value == 1)
                 {
-                    // i[0].y should be > i[1].y but we only need the wrong case to visualization.
+                    // i[0].y should be under i[1].y but we only need the wrong case to visualization.
                     if (results[i[0]].y < results[i[1]].y)
                     {
                         draw.color = Color.red;
@@ -430,12 +444,12 @@ public class ClassicMoveNet : MoveNetSinglePose
     {
         if (results[10].confidence > 0.3f && results[6].confidence > 0.3f)
         {
-            foreach (List<int> i in poseConfigurations[0].horizontalRelation.Keys)
+            foreach (List<int> i in poseConfigurations[1].horizontalRelation.Keys)
             {
-                float value = float.Parse(poseConfigurations[0].horizontalRelation[i]);
+                float value = float.Parse(poseConfigurations[1].horizontalRelation[i]);
                 if (value == 0)
                 {
-                    // i[0].x should be < i[1].x but we only need the wrong case to visualization.
+                    // i[0].x should be left i[1].x but we only need the wrong case to visualization.
                     if (results[i[0]].x > results[i[1]].x)
                     {
                         draw.color = Color.red;
@@ -445,8 +459,36 @@ public class ClassicMoveNet : MoveNetSinglePose
                 }
                 else if (value == 1)
                 {
-                    // i[0].x should be > i[1].x but we only need the wrong case to visualization.
+                    // i[0].x should be right i[1].x but we only need the wrong case to visualization.
                     if (results[i[0]].x < results[i[1]].x)
+                    {
+                        draw.color = Color.red;
+                        DrawResult(results);
+                        return false;
+                    }
+                }
+                else
+                {
+                    Debug.Log("horizontalRelation value error");
+                }
+            }
+            foreach (List<int> i in poseConfigurations[1].verticalRelation.Keys)
+            {
+                float value = float.Parse(poseConfigurations[1].verticalRelation[i]);
+                if (value == 0)
+                {
+                    // i[0].y should be over i[1].y but we only need the wrong case to visualization.
+                    if (results[i[0]].y > results[i[1]].y)
+                    {
+                        draw.color = Color.red;
+                        DrawResult(results);
+                        return false;
+                    }
+                }
+                else if (value == 1)
+                {
+                    // i[0].y should be under i[1].y but we only need the wrong case to visualization.
+                    if (results[i[0]].y < results[i[1]].y)
                     {
                         draw.color = Color.red;
                         DrawResult(results);
@@ -604,12 +646,12 @@ public class ClassicMoveNet : MoveNetSinglePose
     {
         if (results[10].confidence > 0.3f && results[8].confidence > 0.3f && results[6].confidence > 0.3f)
         {
-            foreach (List<int> i in poseConfigurations[0].horizontalRelation.Keys)
+            foreach (List<int> i in poseConfigurations[2].horizontalRelation.Keys)
             {
-                float value = float.Parse(poseConfigurations[0].horizontalRelation[i]);
+                float value = float.Parse(poseConfigurations[2].horizontalRelation[i]);
                 if (value == 0)
                 {
-                    // i[0].x should be < i[1].x but we only need the wrong case to visualization.
+                    // i[0].x should be left i[1].x but we only need the wrong case to visualization.
                     if (results[i[0]].x > results[i[1]].x)
                     {
                         draw.color = Color.red;
@@ -619,7 +661,7 @@ public class ClassicMoveNet : MoveNetSinglePose
                 }
                 else if (value == 1)
                 {
-                    // i[0].x should be > i[1].x but we only need the wrong case to visualization.
+                    // i[0].x should be right i[1].x but we only need the wrong case to visualization.
                     if (results[i[0]].x < results[i[1]].x)
                     {
                         draw.color = Color.red;
@@ -632,13 +674,13 @@ public class ClassicMoveNet : MoveNetSinglePose
                     Debug.Log("horizontalRelation value error");
                 }
             }
-            foreach (List<int> i in poseConfigurations[0].verticalRelation.Keys)
+            foreach (List<int> i in poseConfigurations[2].verticalRelation.Keys)
             {
-                float value = float.Parse(poseConfigurations[0].verticalRelation[i]);
+                float value = float.Parse(poseConfigurations[2].verticalRelation[i]);
                 if (value == 0)
                 {
-                    // i[0].x should be < i[1].x but we only need the wrong case to visualization.
-                    if (results[i[0]].x > results[i[1]].x)
+                    // i[0].y should be over i[1].y but we only need the wrong case to visualization.
+                    if (results[i[0]].y > results[i[1]].y)
                     {
                         draw.color = Color.red;
                         DrawResult(results);
@@ -647,8 +689,8 @@ public class ClassicMoveNet : MoveNetSinglePose
                 }
                 else if (value == 1)
                 {
-                    // i[0].x should be > i[1].x but we only need the wrong case to visualization.
-                    if (results[i[0]].x < results[i[1]].x)
+                    // i[0].y should be under i[1].y but we only need the wrong case to visualization.
+                    if (results[i[0]].y < results[i[1]].y)
                     {
                         draw.color = Color.red;
                         DrawResult(results);
@@ -802,6 +844,7 @@ public class ClassicMoveNet : MoveNetSinglePose
         return true;
     }
 
+    #region NeckIsometricExercise
     private bool NeckIsometricExercise()
     {
         if (results[9].confidence > 0.3f && results[10].confidence > 0.3f)
@@ -947,4 +990,5 @@ public class ClassicMoveNet : MoveNetSinglePose
 
         return true;
     }
+    #endregion
 }

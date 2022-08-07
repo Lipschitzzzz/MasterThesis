@@ -31,25 +31,25 @@
       "type": "vertical",
       "points": "5-9",
       "value": 0,
-      "comment": "the y coordinate of point 5 should be < (>) the y coordinate of point 9 because of the value = 0 (1)"
+      "comment": "the y coordinate of point 5 should be over (under) the y coordinate of point 9 because of the value = 0 (1)"
     },
     {
       "type": "vertical",
       "points": "6-9",
       "value": 0,
-      "comment": "the y coordinate of point 6 should be < (>) the y coordinate of point 9 because of the value = 0 (1)"
+      "comment": "the y coordinate of point 6 should be over (under) the y coordinate of point 9 because of the value = 0 (1)"
     },
     {
       "type": "vertical",
       "points": "5-10",
       "value": 0,
-      "comment": "the y coordinate of point 5 should be < (>) the y coordinate of point 10 because of the value = 0 (1)"
+      "comment": "the y coordinate of point 5 should be over (under) the y coordinate of point 10 because of the value = 0 (1)"
     },
     {
       "type": "vertical",
       "points": "6-10",
       "value": 0,
-      "comment": "the y coordinate of point 6 should be < (>) the y coordinate of point 10 because of the value = 0 (1)"
+      "comment": "the y coordinate of point 6 should be over (under) the y coordinate of point 10 because of the value = 0 (1)"
     }
   ]
 }
