@@ -22,7 +22,8 @@ public class Loading : MonoBehaviour
 
         videoPlayer.targetCameraAlpha = 0.8F;
 
-        videoPlayer.url = "Assets/Resources/Videos/loading.mp4";
+        //videoPlayer.url = "Assets/Resources/Videos/loading.mp4";
+        videoPlayer.url = Application.streamingAssetsPath + "/" + "loading.mp4";
 
         videoPlayer.frame = 100;
 

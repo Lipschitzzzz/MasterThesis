@@ -58,7 +58,7 @@ public class MoveNetSinglePose : MonoBehaviour
             color = Color.red,
         };
 
-        ReadTxt();
+        // ReadTxt();
         results = moveNet.GetResults();
 
     }
@@ -201,9 +201,11 @@ public class MoveNetSinglePose : MonoBehaviour
 
     protected void ReadJson(List<PoseConfigurations> poseConfigurations, string jsonName)
     {
-        string name = utilities.ReadJson("Assets/Resources/Configurations/" + jsonName, "poseName")[0];
+        // string name = utilities.ReadJson("Assets/Resources/Configurations/" + jsonName, "poseName")[0];
+        string name = utilities.ReadJson(Application.streamingAssetsPath + "/" + jsonName, "poseName")[0];
 
-        jsonSettings = utilities.ReadJson("Assets/Resources/Configurations/" + jsonName, "poseDetectValueArray");
+        // jsonSettings = utilities.ReadJson("Assets/Resources/Configurations/" + jsonName, "poseDetectValueArray");
+        jsonSettings = utilities.ReadJson(Application.streamingAssetsPath + "/" + jsonName, "poseDetectValueArray");
         PoseConfigurations temPoseConfigurations = new PoseConfigurations();
         temPoseConfigurations.poseName = name;
         for (int k = 0; k < jsonSettings.Count; k += 3)

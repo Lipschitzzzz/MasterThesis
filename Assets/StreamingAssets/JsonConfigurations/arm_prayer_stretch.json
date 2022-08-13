@@ -1,0 +1,55 @@
+{
+  "poseIndex": 0,
+  "poseName": "ArmPrayerStretch",
+  "poseDetectValueArray":
+  [
+    {
+      "type": "angle",
+      "points": "5-7-9",
+      "value": 60,
+      "comment": "the angle between 5-7-9 should be close to 60 degree"
+    },
+    {
+      "type": "angle",
+      "points": "6-8-10",
+      "value": 60,
+      "comment": "the angle between 6-8-10 should be close to 60 degree"
+    },
+    {
+      "type": "x_relative_distance",
+      "points": "9-10-5-6",
+      "value": 0.25,
+      "comment": "the x distance between 9-10 should be <= the x distance between 5-6 * 0.25"
+    },
+    {
+      "type": "y_relative_distance",
+      "points": "9-10-5-6",
+      "value": 0.25,
+      "comment": "the y distance between 9-10 should be <= the y distance between 5-6 * 0.25"
+    },
+    {
+      "type": "vertical",
+      "points": "5-9",
+      "value": 0,
+      "comment": "the y coordinate of point 5 should be over (under) the y coordinate of point 9 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "6-9",
+      "value": 0,
+      "comment": "the y coordinate of point 6 should be over (under) the y coordinate of point 9 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "5-10",
+      "value": 0,
+      "comment": "the y coordinate of point 5 should be over (under) the y coordinate of point 10 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "6-10",
+      "value": 0,
+      "comment": "the y coordinate of point 6 should be over (under) the y coordinate of point 10 because of the value = 0 (1)"
+    }
+  ]
+}
