@@ -35,16 +35,22 @@ public class MoveNetSinglePose : MonoBehaviour
     public GameObject figure;
     public List<Texture> textures;
     protected PlayerInfo playerInfo;
+    protected bool enableVisualization;
 
 
     protected void Start()
     {
 
-        // string filePath = Directory.GetCurrentDirectory() + @"\Assets\Resources\TFLiteModels\" + fileName;
         string filePath = Application.streamingAssetsPath + "/" + fileName;
-        // Debug.Log(filePath);
+#if UNITY_EDITOR
+        filePath = Application.streamingAssetsPath + "/" + fileName;
+#elif UNITY_ANDROID
+        filePath = "jar:file://" + Application.dataPath + "!/assets/" + fileName;
+#else
+        filePath = Application.streamingAssetsPath + "/" + fileName;
+#endif
         moveNet = new MoveNet(filePath);
-        // utilities = new Utilities();
+        utilities = new Utilities();
         GameObject gameObject = new GameObject("Utilities");
         utilities = gameObject.AddComponent<Utilities>();
 
@@ -73,110 +79,7 @@ public class MoveNetSinglePose : MonoBehaviour
 
     private void Update()
     {
-        //results = moveNet.GetResults();
-        results = moveNet.GetResults();
-        DrawResult(results);
-        //PoseEstimation(results);
-        //for (int i = 0; i < angles.Count; i += 4)
-        //{
-        //    // i point1 index, i + 1 point2 index, i + 2 point3 index
-        //    // e.g 5 - 7 - 9
-        //    int point1_index = angles[i];
-        //    int point2_index = angles[i + 1];
-        //    int point3_index = angles[i + 2];
-        //    if (results[point1_index].confidence < 0.6f && results[point2_index].confidence < 0.6f && results[point3_index].confidence < 0.6f)
-        //    {
-        //        continue;
-        //    }
-
-        //    MoveNet.Result[] angle = new MoveNet.Result[3];
-        //    angle[0] = results[point1_index];
-        //    angle[1] = results[point2_index];
-        //    angle[2] = results[point3_index];
-
-        //    float[] p_1 = { angle[0].y, angle[0].x };
-        //    float[] p_2 = { angle[1].y, angle[1].x };
-        //    float[] p_3 = { angle[2].y, angle[2].x };
-
-        //    // angle at point1 - 2 - 3
-        //    float anglep1p2p3 = utilities.CalculateAngle3Points(p_1, p_2, p_3);
-
-        //    // (255, 0, 0) (0, 255, 0)
-        //    // linear interpolation between red and green
-        //    // pure red 255, 0, 0
-        //    float color_angle = Mathf.Abs(70 - anglep1p2p3);
-        //    float color_point_1_diff = Mathf.Abs(angle[0].y - angle[1].y);
-
-        //    // normalization
-        //    float color_angle_normalization = color_angle / (50 - 0);
-        //    //float color_point_1_diff_normalization = color_point_1_diff / (0.15f - 0);
-
-        //    //Debug.Log(color_point_1_diff_normalization);
-
-        //    // 1 = pure red 0 = pure green others are interpolation
-        //    Color color = new Color(1.0f, 0.0f, 0.0f);
-        //    float final_color = 0;
-        //    final_color = color_angle_normalization;
-
-        //    if (final_color > 1.0f) final_color = 1.0f;
-        //    if (final_color < 0.0f) final_color = 0.0f;
-        //    color = new Color(final_color, 1.0f - final_color, 0);
-        //    Debug.Log(anglep1p2p3);
-        //    //draw.color = float2rgb(final_color);
-        //    draw.color = color;
-        //    DrawAngle(angle);
-        //    if (Mathf.Abs(70 - anglep1p2p3) > 45 || Mathf.Abs(results[7].y - results[9].y) > 0.15 || Mathf.Abs(results[8].y - results[10].y) > 0.15 || Mathf.Abs(results[7].y - results[10].y) > 0.15)
-        //    {
-        //        draw.color = new Color(255, 0, 0);
-        //        DrawAngle(angle);
-        //    }
-        //    //if(final_color < 0.1)
-        //    //{
-        //    //    draw.color = new Color(0, final_color, 0);
-        //    //    DrawAngle(angle);
-        //    //}
-        //    //else if(final_color < 0.3)
-        //    //{
-        //    //    draw.color = new Color(77.0f, 155.0f, 0);
-        //    //    DrawAngle(angle);
-        //    //}
-        //    //else if (final_color < 0.5)
-        //    //{
-        //    //    draw.color = new Color(100.0f, 100.0f, 0);
-        //    //    DrawAngle(angle);
-        //    //}
-        //    //else if (final_color < 0.5)
-        //    //{
-        //    //    draw.color = new Color(155.0f, 77.0f, 0);
-        //    //    DrawAngle(angle);
-        //    //}
-        //    //else
-        //    //{
-        //    //    draw.color = new Color(255.0f, 0, 0);
-        //    //    DrawAngle(angle);
-        //    //}
-
-        //    //if (Mathf.Abs(70 - anglep1p2p3) > 45 || Mathf.Abs(results[7].y - results[9].y) > 0.15 || Mathf.Abs(results[8].y - results[10].y) > 0.15 || Mathf.Abs(results[7].y - results[10].y) > 0.15)
-        //    //{
-        //    //    draw.color = new Color(255, 0, 0);
-        //    //    DrawAngle(angle);
-        //    //}
-
-        //    //// interpolation 255, 255, 0
-        //    //else if (Mathf.Abs(70 - anglep1p2p3) > 30 || Mathf.Abs(results[7].y - results[9].y) > 0.10 || Mathf.Abs(results[8].y - results[10].y) > 0.10 || Mathf.Abs(results[7].y - results[10].y) > 0.10)
-        //    //{
-        //    //    draw.color = new Color(255, 255, 0);
-        //    //    DrawAngle(angle);
-        //    //}
-        //    //// pure green 0, 255, 0
-        //    //else if (Mathf.Abs(70 - anglep1p2p3) > 15 || Mathf.Abs(results[7].y - results[9].y) > 0.05 || Mathf.Abs(results[8].y - results[10].y) > 0.05 || Mathf.Abs(results[7].y - results[10].y) > 0.05)
-        //    //{
-        //    //    draw.color = new Color(0, 255, 0);
-        //    //    DrawAngle(angle);
-        //    //}
-        //}
-
-
+        
     }
 
     protected void ReadTxt()
@@ -201,11 +104,21 @@ public class MoveNetSinglePose : MonoBehaviour
 
     protected void ReadJson(List<PoseConfigurations> poseConfigurations, string jsonName)
     {
-        // string name = utilities.ReadJson("Assets/Resources/Configurations/" + jsonName, "poseName")[0];
-        string name = utilities.ReadJson(Application.streamingAssetsPath + "/" + jsonName, "poseName")[0];
+        string name = "";
+#if UNITY_EDITOR
+        name = utilities.ReadJson(Application.dataPath + "/" + jsonName, "poseName")[0];
+        jsonSettings = utilities.ReadJson(Application.dataPath + "/" + jsonName, "poseDetectValueArray");
+#elif UNITY_IOS || UNITY_IPHONE
+        name = utilities.ReadJson("file://" + Application.streamingAssetsPath + "/" + jsonName, "poseName")[0];
+        jsonSettings = utilities.ReadJson("file://" + Application.streamingAssetsPath + "/" + jsonName, "poseDetectValueArray");
+#elif UNITY_ANDROID
+        name = utilities.ReadJson(Application.dataPath + "/" + jsonName, "poseName")[0];
+        jsonSettings = utilities.ReadJson(Application.dataPath + "/" + jsonName, "poseDetectValueArray");
+#else
+        name = utilities.ReadJson(Application.dataPath + "/StreamingAssets" + "/" + jsonName, "poseName")[0];
+        jsonSettings = utilities.ReadJson(Application.dataPath + "/StreamingAssets" + "/" + jsonName, "poseDetectValueArray");
+#endif
 
-        // jsonSettings = utilities.ReadJson("Assets/Resources/Configurations/" + jsonName, "poseDetectValueArray");
-        jsonSettings = utilities.ReadJson(Application.streamingAssetsPath + "/" + jsonName, "poseDetectValueArray");
         PoseConfigurations temPoseConfigurations = new PoseConfigurations();
         temPoseConfigurations.poseName = name;
         for (int k = 0; k < jsonSettings.Count; k += 3)
@@ -283,6 +196,20 @@ public class MoveNetSinglePose : MonoBehaviour
         poseConfigurations.Add(temPoseConfigurations);
 
 
+    }
+
+    protected void InitializeJson(List<PoseConfigurations> poseConfigurations, string jsonName)
+    {
+
+        PoseConfigurations temPoseConfigurations = new PoseConfigurations();
+        temPoseConfigurations.poseName = name;
+        List<int> temp = new List<int>();
+        temp.Add(5);
+        temp.Add(7);
+        temp.Add(9);
+        temPoseConfigurations.angles.Add(temp, "60");
+
+        poseConfigurations.Add(temPoseConfigurations);
     }
 
     protected virtual void PoseEstimation() { }

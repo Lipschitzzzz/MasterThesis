@@ -21,19 +21,6 @@ public class MainSceneManager : MonoBehaviour
         audioManager.SetActive(false);
         startTime = Time.time;
 
-        videoPlayer.playOnAwake = false;
-
-        videoPlayer.renderMode = UnityEngine.Video.VideoRenderMode.CameraNearPlane;
-
-        videoPlayer.targetCameraAlpha = 0.8F;
-
-        videoPlayer.url = "Assets/Resources/Videos/loading.mp4";
-
-        videoPlayer.frame = 100;
-
-        videoPlayer.isLooping = false;
-
-        videoPlayer.Play();
     }
 
     IEnumerator isDone()

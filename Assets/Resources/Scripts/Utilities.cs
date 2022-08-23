@@ -56,6 +56,7 @@ public class Utilities : MonoBehaviour
         return Mathf.Sqrt(Mathf.Pow(x, 2) + Mathf.Pow(y, 2));
     }
 
+    // for PC Mac Linux UNITY_EDITOR
     public List<string> ReadJson(string path, string key)
     {
         List<string> json_settings = new List<string>();
@@ -93,8 +94,6 @@ public class Utilities : MonoBehaviour
             }
         }
     }
-
-
 
     // Start is called before the first frame update
     void Start()
