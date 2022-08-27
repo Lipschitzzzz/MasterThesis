@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // this class save the all data parsing from the json
-public class PoseConfigurations : MonoBehaviour
+public class PoseConfigurations
 {
     public string poseName;
     public Dictionary<List<int>, string> angles;
@@ -17,6 +17,8 @@ public class PoseConfigurations : MonoBehaviour
     public Dictionary<List<int>, string> verticalRelation;
     public Dictionary<List<int>, string> horizontalRelation;
 
+    public Dictionary<List<int>, string> vectors;
+
     public PoseConfigurations()
     {
         poseName = "undefined";
@@ -27,6 +29,7 @@ public class PoseConfigurations : MonoBehaviour
         yRelativeDistance = new Dictionary<List<int>, string>();
         verticalRelation = new Dictionary<List<int>, string>();
         horizontalRelation = new Dictionary<List<int>, string>();
+        vectors = new Dictionary<List<int>, string>();
     }
 
     // Start is called before the first frame update

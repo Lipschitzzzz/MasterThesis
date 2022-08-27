@@ -134,6 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 86521803}
   - component: {fileID: 86521804}
+  - component: {fileID: 86521802}
   - component: {fileID: 86521805}
   m_Layer: 0
   m_Name: MoveNet
@@ -142,6 +143,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &86521802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86521801}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79652f67b30a4442f9200189000f7eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  palmModelFile: palm_detection_builtin_256_float16_quant.tflite
+  landmarkModelFile: hand_landmark_256_float16_quant.tflite
+  cameraView: {fileID: 680501608}
+  runBackground: 0
 --- !u!4 &86521803
 Transform:
   m_ObjectHideFlags: 0
@@ -187,7 +204,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
 --- !u!114 &86521805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +228,6 @@ MonoBehaviour:
   - {fileID: 2800000, guid: ddeff6de7548d1747b9a1b4a9298c20a, type: 3}
   - {fileID: 2800000, guid: b7cd9a6ab699ea243a5091881bcf815c, type: 3}
   - {fileID: 2800000, guid: cd6e3e0da182a4c43bcb810cf1780aa1, type: 3}
-  enableVisualization: 0
   jsonNameArmPrayerStretch: arm_prayer_stretch.json
   jsonNameLatissimusDorsiMuscleStretch: latissimus_dorsi_muscle_stretch.json
   jsonNameUpperTrapStretchRight: upper_trap_stretch_right.json
@@ -1061,8 +1077,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -269.3094, y: 0}
-  m_SizeDelta: {x: -540.1812, y: 0}
+  m_AnchoredPosition: {x: -135.04529, y: 0}
+  m_SizeDelta: {x: -270.09058, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &680501607
 MonoBehaviour:
@@ -1077,7 +1093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 0
-  m_AspectRatio: 1.3834698
+  m_AspectRatio: 1.6420504
 --- !u!114 &680501608
 MonoBehaviour:
   m_ObjectHideFlags: 0

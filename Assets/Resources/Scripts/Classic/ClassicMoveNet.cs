@@ -15,16 +15,8 @@ public class ClassicMoveNet : MoveNetSinglePose
     public string jsonNameUpperTrapStretchRight;
     public string jsonNameNeckIsometricExercise;
 
-    private string currentPoseName;
     private int currentPoseIndex;
-    // private float timeLine1 = 0.0f;
-    // private float timeLine2 = 0.0f;
-    private float time;
     private List<PoseConfigurations> poseConfigurations;
-    PoseConfigurations currentPoseConfiguration;
-
-    private Type t;
-    private MethodInfo methodName;
 
     // Start is called before the first frame update
     new void Start()
@@ -33,20 +25,7 @@ public class ClassicMoveNet : MoveNetSinglePose
         enableVisualization = true;
         playerInfo = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
         poseConfigurations = new List<PoseConfigurations>();
-        currentPoseConfiguration = new PoseConfigurations();
         
-        t = typeof(ClassicMoveNet);
-        MethodInfo methodName = t.GetMethod("ArmPrayerStretch", BindingFlags.Public);
-        if (methodName == null)
-        {
-            Debug.Log("didn't find this function!");
-        }
-        else
-        {
-            bool test = (bool)methodName.Invoke(null, null);
-            Debug.Log("test: " + test);
-        }
-
         // StartCoroutine(RandomPoseFigure());
 
         JsonConfig jsonConfig = new JsonConfig();
@@ -64,7 +43,8 @@ public class ClassicMoveNet : MoveNetSinglePose
     // Update is called once per frame
     void Update()
     {
-        results = moveNet.GetResults();
+        Invoke(cameraView.texture);
+        // DrawResult(results);
         // DrawResult(results);
         PoseEstimation();
     }
@@ -113,7 +93,6 @@ public class ClassicMoveNet : MoveNetSinglePose
     protected override void PoseEstimation()
     {
         bool matched = false;
-        currentPoseConfiguration = poseConfigurations[currentPoseIndex];
 
         // arm_prayer_stretch
         if (currentPoseIndex == 0)
@@ -160,279 +139,23 @@ public class ClassicMoveNet : MoveNetSinglePose
 
     }
 
-    // generic pose estimation function, always parse all data in the PoseConfigurations
-    private bool ParsePoseConfigurations(PoseConfigurations poseConfigurations)
-    {
-        List<bool> matched = new List<bool>();
-
-        // horizontal
-        foreach (List<int> i in poseConfigurations.horizontalRelation.Keys)
-        {
-            if (results[i[0]].confidence > 0.3f && results[i[1]].confidence > 0.3f)
-            {
-                float value = float.Parse(poseConfigurations.horizontalRelation[i]);
-                if (value == 0)
-                {
-                    // i[0].x should be left i[1].x but we only need the wrong case to visualization.
-                    if (results[i[0]].x > results[i[1]].x)
-                    {
-                        draw.color = Color.red;
-                        if (enableVisualization)
-                        {
-                            DrawResult(results);
-                        }
-                        matched.Add(false);
-                    }
-                }
-                else if (value == 1)
-                {
-                    // i[0].x should be right i[1].x but we only need the wrong case to visualization.
-                    if (results[i[0]].x < results[i[1]].x)
-                    {
-                        draw.color = Color.red;
-                        if (enableVisualization)
-                        {
-                            DrawResult(results);
-                        }
-                        matched.Add(false);
-                    }
-                }
-                else
-                {
-                    Debug.Log("horizontalRelation value error");
-                }
-            }
-            else
-            {
-                matched.Add(false);
-            }
-
-        }
-
-        // vertical
-        foreach (List<int> i in poseConfigurations.verticalRelation.Keys)
-        {
-            if (results[i[0]].confidence > 0.3f && results[i[1]].confidence > 0.3f)
-            {
-                float value = float.Parse(poseConfigurations.verticalRelation[i]);
-                if (value == 0)
-                {
-                    // i[0].y should be over i[1].y but we only need the wrong case to visualization.
-                    if (results[i[0]].y > results[i[1]].y)
-                    {
-                        draw.color = Color.red;
-                        if (enableVisualization)
-                        {
-                            DrawResult(results);
-                        }
-                        matched.Add(false);
-                    }
-                }
-                else if (value == 1)
-                {
-                    // i[0].y should be under i[1].y but we only need the wrong case to visualization.
-                    if (results[i[0]].y < results[i[1]].y)
-                    {
-                        draw.color = Color.red;
-                        if (enableVisualization)
-                        {
-                            DrawResult(results);
-                        }
-                        matched.Add(false);
-                    }
-                }
-                else
-                {
-                    Debug.Log("verticalRelation value error");
-                }
-            }
-            else
-            {
-                matched.Add(false);
-            }
-        }
-
-        // xRelativeDistance
-        foreach (List<int> i in poseConfigurations.xRelativeDistance.Keys)
-        {
-            // line0 point0 - point1
-            int pointIndex0 = i[0];
-            int pointIndex1 = i[1];
-
-            // line1 point2 - point3
-            int pointIndex2 = i[2];
-            int pointIndex3 = i[3];
-
-            // proportion = distance(line0 / line1)
-            float proportion = float.Parse(poseConfigurations.xRelativeDistance[i]);
-
-            if (results[pointIndex0].confidence > 0.3f && results[pointIndex1].confidence > 0.3f && results[pointIndex2].confidence > 0.3f && results[pointIndex3].confidence > 0.3f)
-            {
-                float line0 = Mathf.Abs(results[pointIndex0].x - results[pointIndex1].x);
-                float line1 = Mathf.Abs(results[pointIndex2].x - results[pointIndex3].x);
-
-                // float relativeDistance = line0 / line1;
-                // distance 1 - distance 2
-                float tolerance = line1 * proportion;
-
-                // float x_normalization = Mathf.Abs(relativeDistance - proportion) / (proportion - 0);
-
-                Color color = new Color(1.0f, 0.0f, 0.0f);
-
-                if (line0 < tolerance)
-                {
-                    color = new Color(0.0f, 1.0f, 0.0f);
-                    matched.Add(true);
-                }
-                else
-                {
-                    matched.Add(false);
-                }
-                // color = new Color(x_normalization, 1 - x_normalization, 0);
-
-                draw.color = color;
-                MoveNet.Result[] line = new MoveNet.Result[2];
-                line[0] = results[pointIndex0];
-                line[1] = results[pointIndex1];
-                if (enableVisualization)
-                {
-                    DrawLine(line);
-                }
-            }
-            else
-            {
-                matched.Add(false);
-            }
-        }
-
-        // yRelativeDistance
-        foreach (List<int> i in poseConfigurations.yRelativeDistance.Keys)
-        {
-            // line0 point0 - point1
-            int pointIndex0 = i[0];
-            int pointIndex1 = i[1];
-
-            // line1 point2 - point3
-            int pointIndex2 = i[2];
-            int pointIndex3 = i[3];
-
-            // proportion = distance(line0 / line1)
-            float proportion = float.Parse(poseConfigurations.yRelativeDistance[i]);
-
-            // Debug.Log(pointIndex0.ToString() + ' ' + pointIndex1.ToString() + ' ' +
-            //     pointIndex2.ToString() + ' ' + pointIndex3.ToString() + ' ' + proportion.ToString());
-
-            if (results[pointIndex0].confidence > 0.3f && results[pointIndex1].confidence > 0.3f && results[pointIndex2].confidence > 0.3f && results[pointIndex3].confidence > 0.3f)
-            {
-                float line0 = Mathf.Abs(results[pointIndex0].y - results[pointIndex1].y);
-                float line1 = Mathf.Abs(results[pointIndex2].y - results[pointIndex3].y);
-
-                float tolerance = line1 * proportion;
-                Color color = new Color(1.0f, 0.0f, 0.0f);
-                if (line0 < tolerance)
-                {
-                    color = new Color(0.0f, 1.0f, 0.0f);
-                    matched.Add(true);
-                }
-                else
-                {
-                    matched.Add(false);
-                }
-
-                MoveNet.Result[] line = new MoveNet.Result[2];
-                line[0] = results[pointIndex0];
-                line[1] = results[pointIndex1];
-
-
-            }
-            else
-            {
-                matched.Add(false);
-            }
-        }
-
-        // angle
-        foreach (List<int> i in poseConfigurations.angles.Keys)
-        {
-            // point0 point1 point2
-            int pointIndex0 = i[0];
-            int pointIndex1 = i[1];
-            int pointIndex2 = i[2];
-
-            // angle between point0 point1 point2
-            float value = float.Parse(poseConfigurations.angles[i]);
-            // Debug.Log(pointIndex0.ToString() + ' ' + pointIndex1.ToString() + ' ' + pointIndex2.ToString() + ' ' + value.ToString());
-            if (results[pointIndex0].confidence > 0.3f && results[pointIndex1].confidence > 0.3f && results[pointIndex2].confidence > 0.3f)
-            {
-                MoveNet.Result[] angle = new MoveNet.Result[3];
-
-                angle[0] = results[pointIndex0];
-                angle[1] = results[pointIndex1];
-                angle[2] = results[pointIndex2];
-
-                float[] p0 = { results[pointIndex0].x, results[pointIndex0].y };
-                float[] p1 = { results[pointIndex1].x, results[pointIndex1].y };
-                float[] p2 = { results[pointIndex2].x, results[pointIndex2].y };
-
-                float angle_normalization = Mathf.Abs(utilities.CalculateAngle3Points(p0, p1, p2) - value) / (value - 0);
-
-                Color color = new Color(1.0f, 0.0f, 0.0f);
-                color = new Color(angle_normalization, 1 - angle_normalization, 0);
-
-                draw.color = color;
-
-                if (enableVisualization)
-                {
-                    DrawAngle(angle);
-                }
-                
-
-                if (angle_normalization <= 0.5)
-                {
-                    matched.Add(true);
-                }
-                else
-                {
-                    matched.Add(false);
-                }
-            }
-            else
-            {
-                matched.Add(false);
-            }
-        }
-
-        if (matched.Count == 0)
-        {
-            return false;
-        }
-
-        foreach (bool i in matched)
-        {
-            if (!i)
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
+    
 
     private bool ArmPrayerStretch()
     {
-        return ParsePoseConfigurations(poseConfigurations[0]);
+        return base.ParsePoseConfigurations(poseConfigurations[0]);
 
     }
 
     private bool LatissimusDorsiMuscleStretch()
     {
-        return ParsePoseConfigurations(poseConfigurations[1]);
+        return base.ParsePoseConfigurations(poseConfigurations[1]);
 
     }
 
     private bool UpperTrapStretchRight()
     {
-        return ParsePoseConfigurations(poseConfigurations[2]);
+        return base.ParsePoseConfigurations(poseConfigurations[2]);
 
     }
 

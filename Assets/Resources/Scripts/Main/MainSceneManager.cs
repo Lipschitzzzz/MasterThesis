@@ -1,45 +1,102 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.Android;
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class MainSceneManager : MonoBehaviour
 {
-    public VideoPlayer videoPlayer;
+    public GameObject videoPlayer;
     public GameObject canvas;
     public GameObject audioManager;
-    private float startTime;
-    private bool isStart = false;
+    public GameObject playerInfo;
 
     // Start is called before the first frame update
     void Start()
     {
         audioManager = GameObject.Find("AudioManager");
+        videoPlayer = GameObject.Find("VideoPlayer");
+        playerInfo = GameObject.Find("PlayerInfo");
         audioManager.GetComponent<AudioManager>().muteUnmuteButton = GameObject.Find("Mute");
-        canvas.SetActive(false);
-        audioManager.SetActive(false);
-        startTime = Time.time;
 
+        // the first time enter game
+        if (playerInfo.GetComponent<PlayerInfo>().totalTime < 2.0f)
+        {
+            canvas.SetActive(false);
+            audioManager.SetActive(false);
+        }
+        // other scenes are loading to main scene
+        else
+        {
+            Mute();
+            Mute();
+        }
+        
+
+        if (Permission.HasUserAuthorizedPermission(Permission.Camera))
+        {
+            // The user authorized use of the microphone.
+        }
+        else
+        {
+            bool useCallbacks = false;
+            if (!useCallbacks)
+            {
+                // We do not have permission to use the microphone.
+                // Ask for permission or proceed without the functionality enabled.
+                Permission.RequestUserPermission(Permission.Camera);
+            }
+            else
+            {
+                PermissionCallbacks callbacks = new PermissionCallbacks();
+                callbacks.PermissionDenied += PermissionCallbacks_PermissionDenied;
+                callbacks.PermissionGranted += PermissionCallbacks_PermissionGranted;
+                callbacks.PermissionDeniedAndDontAskAgain += PermissionCallbacks_PermissionDeniedAndDontAskAgain;
+                Permission.RequestUserPermission(Permission.Microphone, callbacks);
+            }
+        }
     }
 
-    IEnumerator isDone()
+    // only play at the first time loading main scene. After the playing this object will be SetActive(false) so that it can not
+    // play anymore when we load it from other scenes.
+    private void PlayVideoOnlyOnce()
     {
-        if (!videoPlayer.isPlaying)
+        // other scenes are loading to main scene
+        if (videoPlayer == null)
+        {
+            return;
+        }
+        // the first time enter game
+        else if (playerInfo.GetComponent<PlayerInfo>().totalTime > 2.0f && !videoPlayer.GetComponent<VideoPlayer>().isPlaying)
         {
             canvas.SetActive(true);
             audioManager.SetActive(true);
-            yield return null;
+            videoPlayer.gameObject.SetActive(false);
         }
+
     }
+    
     // Update is called once per frame
     void Update()
     {
-        if (!isStart && Time.time - startTime > 2.0f)
-        {
-            StartCoroutine(isDone());
-        }
+        PlayVideoOnlyOnce();
 
+    }
+
+    internal void PermissionCallbacks_PermissionDeniedAndDontAskAgain(string permissionName)
+    {
+        Debug.Log($"{permissionName} PermissionDeniedAndDontAskAgain");
+    }
+
+    internal void PermissionCallbacks_PermissionGranted(string permissionName)
+    {
+        Debug.Log($"{permissionName} PermissionCallbacks_PermissionGranted");
+    }
+
+    internal void PermissionCallbacks_PermissionDenied(string permissionName)
+    {
+        Debug.Log($"{permissionName} PermissionCallbacks_PermissionDenied");
     }
 
     public void Mute()
@@ -53,8 +110,7 @@ public class MainSceneManager : MonoBehaviour
     }
     public void SpecialStart()
     {
-        Debug.Log("The Special Scene is updating");
-        // SceneManager.LoadScene("Special");
+        SceneManager.LoadScene("Challenge");
     }
 
     public void GameQuit()

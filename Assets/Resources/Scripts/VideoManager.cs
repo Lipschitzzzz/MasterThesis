@@ -1,21 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Video;
 using UnityEngine;
 
-public class PlayerInfo : MonoBehaviour
+public class VideoManager : MonoBehaviour
 {
-    public int level;
+    private static VideoManager instance = null;
+    public VideoPlayer videoPlayer;
 
-    public float score;
-
-    public float totalTime;
-
-    private static PlayerInfo instance = null;
-
-    public static PlayerInfo Instance
+    public static VideoManager Instance
     {
-        get { return instance; }
+        get { return Instance; }
     }
+
     private void Awake()
     {
         if (instance == null)
@@ -30,29 +27,16 @@ public class PlayerInfo : MonoBehaviour
         }
 
     }
-    IEnumerator TotalTime()
-    {
-        while (true)
-        {
-            totalTime += 0.1f;
-            yield return new WaitForSeconds(0.1f);
-        }
-
-    }
 
     // Start is called before the first frame update
     void Start()
     {
-        totalTime = 0.0f;
-        StartCoroutine(TotalTime());
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
-
-
-
 }

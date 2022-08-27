@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class SpecialTimeManager : TimeManager
+public class ChallengeTimeManager : TimeManager
 {
     public GameObject[] gameObjects;
 
@@ -51,9 +51,8 @@ public class SpecialTimeManager : TimeManager
     }
 
 
-    public void QuitSpecial()
+    public void QuitChallenge()
     {
         SceneManager.LoadScene("Main");
-
     }
 }

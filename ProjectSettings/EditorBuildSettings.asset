@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Classic.unity
     guid: 02dfbc9facbdd471282c8493f3961146
   - enabled: 1
-    path: Assets/Scenes/Special.unity
+    path: Assets/Scenes/Challenge.unity
     guid: f4d31721416bed44ead5f1d2e243afda
   m_configObjects: {}

@@ -103,6 +103,15 @@ public class JsonConfig
                 }
                 temPoseConfigurations.horizontalRelation.Add(temp, i.value.ToString());
             }
+            else if (i.type == "vector")
+            {
+                List<int> temp = new List<int>();
+                foreach (string point_index in i.points.Split('-'))
+                {
+                    temp.Add(int.Parse(point_index));
+                }
+                temPoseConfigurations.vectors.Add(temp, i.value.ToString());
+            }
             else
             {
                 Debug.Log("unknown type of poseDetectValueArray: " + i.type);

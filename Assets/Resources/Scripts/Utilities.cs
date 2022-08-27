@@ -4,12 +4,50 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-public class Utilities : MonoBehaviour
+public class Utilities
 {
 
     private float angle_3_points;
 
-    // calculate the angle between the given 3 points. After convert from proportion to absolute coordinate.
+    // calculate the angle between the given 4 points. alphx = Acos( (ab * cd) / (norm ab * norm cd))
+    public float CalculateAngle4Points(float[] a, float[] b, float[] c, float[] d)
+    {
+        if (a.Length != 2 || b.Length != 2 || c.Length != 2 || d.Length != 2)
+        {
+            Debug.Log("calculate_angle_3_points array dimension is incorrect");
+            return 0.0f;
+        }
+
+        float x_1 = a[0];
+        float y_1 = 1f - a[1];
+
+        float x_2 = b[0];
+        float y_2 = 1f - b[1];
+
+        float x_3 = c[0];
+        float y_3 = 1f - c[1];
+
+        float x_4 = d[0];
+        float y_4 = 1f - d[1];
+
+        float x_V1 = x_2 - x_1;
+        float y_V1 = y_2 - y_1;
+
+        float x_V2 = x_4 - x_3;
+        float y_V2 = y_4 - y_3;
+
+        float V1_V2 = (x_V1 * x_V2) + (y_V1 * y_V2);
+
+        float V1_norm = Mathf.Sqrt((x_V1 * x_V1) + (y_V1 * y_V1));
+        float V2_norm = Mathf.Sqrt((x_V2 * x_V2) + (y_V2 * y_V2));
+
+        float alpha = Mathf.Acos(V1_V2 / (V1_norm * V2_norm));
+        alpha = (alpha / Mathf.PI) * 180f;
+
+        return alpha;
+    }
+
+    // calculate the angle between the given 3 points. Angle abc
     public float CalculateAngle3Points(float[] a, float[] b, float[] c)
     {
         if (a.Length != 2 || b.Length != 2 || c.Length != 2)
@@ -41,10 +79,6 @@ public class Utilities : MonoBehaviour
         float alpha = Mathf.Acos(BA_BC / (BA_norm * BC_norm));
         alpha = (alpha / Mathf.PI) * 180f;
 
-        //Debug.Log("Angle(1-2-3): " + alpha);
-        //Debug.Log("relative distance(1-2): " + BA_norm);
-        //Debug.Log("relative distance(2-3): " + BC_norm);
-
         return alpha;
     }
 
@@ -56,7 +90,7 @@ public class Utilities : MonoBehaviour
         return Mathf.Sqrt(Mathf.Pow(x, 2) + Mathf.Pow(y, 2));
     }
 
-    // for PC Mac Linux UNITY_EDITOR
+    // for PC Mac Linux UNITY_EDITOR only
     public List<string> ReadJson(string path, string key)
     {
         List<string> json_settings = new List<string>();
