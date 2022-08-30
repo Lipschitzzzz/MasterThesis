@@ -481,26 +481,23 @@ public class MoveNetSinglePose : MonoBehaviour
                 float[] p2 = { results[pointIndex2].x, results[pointIndex2].y };
                 float[] p3 = { results[pointIndex3].x, results[pointIndex3].y };
 
-                float angle_normalization = Mathf.Abs(utilities.CalculateAngle4Points(p0, p1, p2, p3) - value) / (20 - 0);
-                
-                Color color = new Color(1.0f, 0.0f, 0.0f);
-                color = new Color(1 - angle_normalization, angle_normalization, 0);
-                draw.color = color;
+                float angle_normalization = Mathf.Abs((utilities.CalculateAngle4Points(p0, p1, p2, p3) - value)) / (value - 0);
+
+                if (angle_normalization <= 0.05 && angle_normalization > 0.0)
+                {
+                    draw.color = Color.green;
+                    matched.Add(true);
+                }
+                else
+                {
+                    draw.color = Color.red;
+                    matched.Add(false);
+                }
 
                 if (enableVisualization)
                 {
                     DrawLine(v1);
                     DrawLine(v2);
-                }
-
-
-                if (angle_normalization >= 1)
-                {
-                    matched.Add(true);
-                }
-                else
-                {
-                    matched.Add(false);
                 }
             }
             else

@@ -60,8 +60,8 @@
       {
         "type": "vector",
         "points": "3-4-6-5",
-        "value": 180,
-        "comment": "the angle between vector 4 -> 3 and vector 6 -> 5 should be close to 0 degree"
+        "value": 150,
+        "comment": "the angle between vector 3 -> 4 and vector 5 -> 6 should be close to 150 degree"
       }
     ]
   }

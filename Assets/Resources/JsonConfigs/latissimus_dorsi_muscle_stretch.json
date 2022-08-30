@@ -46,6 +46,12 @@
         "comment": "the y coordinate of point 10 should be over (under) the y coordinate of point 6 because of the value = 0 (1)"
       },
       {
+        "type": "vertical",
+        "points": "4-1",
+        "value": 0,
+        "comment": "the y coordinate of point 4 should be over (under) the y coordinate of point 1 because of the value = 0 (1)"
+      },
+      {
         "type": "horizontal",
         "points": "6-8",
         "value": 0,
@@ -86,6 +92,18 @@
         "points": "8-4",
         "value": 0,
         "comment": "the x coordinate of point 8 should be left (right) the x coordinate of point 4 because of the value = 0 (1)"
+      },
+      {
+        "type": "vector",
+        "points": "3-4-6-5",
+        "value": 160,
+        "comment": "the angle between vector 4 -> 3 and vector 5 -> 6 should be close to 160 degree"
+      },
+      {
+        "type": "vector",
+        "points": "3-4-5-11",
+        "value": 115,
+        "comment": "the angle between vector 4 -> 3 and vector 11 -> 5 should be close to 115 degree"
       }
     ]
   }
