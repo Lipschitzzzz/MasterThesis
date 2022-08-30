@@ -110,7 +110,8 @@ public class MainSceneManager : MonoBehaviour
     }
     public void SpecialStart()
     {
-        SceneManager.LoadScene("Challenge");
+        Debug.Log("Updating");
+        // SceneManager.LoadScene("Challenge");
     }
 
     public void GameQuit()
