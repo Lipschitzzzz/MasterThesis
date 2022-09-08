@@ -23,7 +23,7 @@ public class ClassicMoveNet : MoveNetSinglePose
     {
         base.Start();
         enableVisualization = true;
-        playerInfo = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
+        // playerInfo = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
         poseConfigurations = new List<PoseConfigurations>();
         
         // StartCoroutine(RandomPoseFigure());

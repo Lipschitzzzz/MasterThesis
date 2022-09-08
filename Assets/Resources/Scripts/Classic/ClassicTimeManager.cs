@@ -27,7 +27,7 @@ public class ClassicTimeManager : TimeManager
     // Start is called before the first frame update
     void Start()
     {
-        playerInfo = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
+        // playerInfo = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
         countdown = 60.0f;
         StartCoroutine(UpdateCountdownBar());
     }
@@ -43,7 +43,7 @@ public class ClassicTimeManager : TimeManager
         {
             countdown -= 0.5f * 0.05f * (Time.time - pressedTime);
         }
-        UpdateLevelBar();
+        // UpdateLevelBar();
     }
 
     private void UpdateLevelBar()

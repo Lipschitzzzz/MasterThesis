@@ -181,7 +181,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -1709,7 +1709,6 @@ MonoBehaviour:
   palmModelFile: palm_detection_builtin_256_float16_quant.tflite
   landmarkModelFile: hand_landmark.tflite
   cameraView: {fileID: 1274490470}
-  debugPalmView: {fileID: 1320396092}
   runBackground: 0
 --- !u!4 &1450387241
 Transform:
@@ -2096,6 +2095,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 0}
+  poseQuadObjects: []
+  quad: {fileID: 0}
+  poseManager: {fileID: 0}
+  poseTextures: []
 --- !u!4 &1663573709
 Transform:
   m_ObjectHideFlags: 0

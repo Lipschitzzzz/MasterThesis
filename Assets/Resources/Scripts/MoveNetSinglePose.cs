@@ -497,7 +497,7 @@ public class MoveNetSinglePose : MonoBehaviour
                 if (enableVisualization)
                 {
                     DrawLine(v1);
-                    DrawLine(v2);
+                    // DrawLine(v2);
                 }
             }
             else

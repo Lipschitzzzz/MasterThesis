@@ -69,6 +69,7 @@ public class AudioManager : MonoBehaviour
             isPlaying = true;
 
         }
+
     }
 
     private void PlayAudio()
@@ -91,6 +92,11 @@ public class AudioManager : MonoBehaviour
             audioSource.mute = !audioSource.mute;
             isMuted = false;
         }
+    }
+
+    public string GetCurrentSongName()
+    {
+        return audioClips[currentPlayingIndex].name;
     }
 
 }

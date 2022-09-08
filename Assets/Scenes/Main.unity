@@ -230,7 +230,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &80322756
 Canvas:
   m_ObjectHideFlags: 0
@@ -240,8 +240,8 @@ Canvas:
   m_GameObject: {fileID: 80322753}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 2
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -261,7 +261,7 @@ RectTransform:
   m_GameObject: {fileID: 80322753}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.59553623, y: 0.59553623, z: 0.59553623}
   m_Children:
   - {fileID: 389163899}
   - {fileID: 181399856}
@@ -271,8 +271,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_SizeDelta: {x: 2107.3445, y: 983.9871}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &80322758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a5bc3f38b5a017147a8a76944e43bb63, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6d7457af7406b39448d8719d94dd2275, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -454,7 +454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &389163899
 RectTransform:
   m_ObjectHideFlags: 0
@@ -526,12 +526,12 @@ PrefabInstance:
     - target: {fileID: 4361518947165378089, guid: c354ea71afdcf884f82fa00beb0d53d7,
         type: 3}
       propertyPath: m_Text
-      value: To be decided
+      value: Help
       objectReference: {fileID: 0}
     - target: {fileID: 4361518947610900009, guid: c354ea71afdcf884f82fa00beb0d53d7,
         type: 3}
       propertyPath: m_Name
-      value: To be decided
+      value: Help
       objectReference: {fileID: 0}
     - target: {fileID: 4361518947610900022, guid: c354ea71afdcf884f82fa00beb0d53d7,
         type: 3}
@@ -758,9 +758,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  field of view: 33.614212
+  orthographic: 1
+  orthographic size: 293.43
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -784,7 +784,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -109.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1173,12 +1173,12 @@ PrefabInstance:
     - target: {fileID: 4361518947610900022, guid: c354ea71afdcf884f82fa00beb0d53d7,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -681
+      value: -744.9879
       objectReference: {fileID: 0}
     - target: {fileID: 4361518947610900022, guid: c354ea71afdcf884f82fa00beb0d53d7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 411.9
+      value: 382.99365
       objectReference: {fileID: 0}
     - target: {fileID: 4361518947610900022, guid: c354ea71afdcf884f82fa00beb0d53d7,
         type: 3}
@@ -1204,7 +1204,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1bd71da77a248a14bb8016f19c5519bd,
+      objectReference: {fileID: 21300000, guid: c76c624d8b48847438707a9f4ddf4556,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c354ea71afdcf884f82fa00beb0d53d7, type: 3}
@@ -1456,6 +1456,43 @@ PrefabInstance:
       propertyPath: muteUnmuteButton
       value: 
       objectReference: {fileID: 262114595}
+    - target: {fileID: 728771393308179769, guid: df0f5190424654e4f8b970740da394a0,
+        type: 3}
+      propertyPath: audioClips.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 728771393308179769, guid: df0f5190424654e4f8b970740da394a0,
+        type: 3}
+      propertyPath: audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ccb7a0a328754d44b9663f965725888, type: 3}
+    - target: {fileID: 728771393308179769, guid: df0f5190424654e4f8b970740da394a0,
+        type: 3}
+      propertyPath: audioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: dd1a77ab59151cd46a01ba0d02cdc750, type: 3}
+    - target: {fileID: 728771393308179769, guid: df0f5190424654e4f8b970740da394a0,
+        type: 3}
+      propertyPath: audioClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: a19f83ddbce14824dbec35ad3bfaa545, type: 3}
+    - target: {fileID: 728771393308179769, guid: df0f5190424654e4f8b970740da394a0,
+        type: 3}
+      propertyPath: audioClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 72e8e918dfeac3f4e9b5b18f69aab476, type: 3}
+    - target: {fileID: 728771393308179769, guid: df0f5190424654e4f8b970740da394a0,
+        type: 3}
+      propertyPath: muteUnmuteSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: f4fbcb2a0cf82c34dad7b245679141d6,
+        type: 3}
+    - target: {fileID: 728771393308179769, guid: df0f5190424654e4f8b970740da394a0,
+        type: 3}
+      propertyPath: muteUnmuteSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: c76c624d8b48847438707a9f4ddf4556,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df0f5190424654e4f8b970740da394a0, type: 3}
 --- !u!1001 &1342611152280542608
@@ -1537,12 +1574,12 @@ PrefabInstance:
     - target: {fileID: 4361518947165378089, guid: c354ea71afdcf884f82fa00beb0d53d7,
         type: 3}
       propertyPath: m_Text
-      value: Challenge
+      value: 2048
       objectReference: {fileID: 0}
     - target: {fileID: 4361518947610900009, guid: c354ea71afdcf884f82fa00beb0d53d7,
         type: 3}
       propertyPath: m_Name
-      value: Challenge
+      value: 2048
       objectReference: {fileID: 0}
     - target: {fileID: 4361518947610900020, guid: c354ea71afdcf884f82fa00beb0d53d7,
         type: 3}
@@ -1567,7 +1604,7 @@ PrefabInstance:
     - target: {fileID: 4361518947610900020, guid: c354ea71afdcf884f82fa00beb0d53d7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SpecialStart
+      value: Start2048
       objectReference: {fileID: 0}
     - target: {fileID: 4361518947610900020, guid: c354ea71afdcf884f82fa00beb0d53d7,
         type: 3}

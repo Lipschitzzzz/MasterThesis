@@ -108,10 +108,9 @@ public class MainSceneManager : MonoBehaviour
     {
         SceneManager.LoadScene("Classic");
     }
-    public void SpecialStart()
+    public void Start2048()
     {
-        Debug.Log("Updating");
-        // SceneManager.LoadScene("Challenge");
+        SceneManager.LoadScene("2048");
     }
 
     public void GameQuit()

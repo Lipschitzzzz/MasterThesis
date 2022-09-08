@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using TensorFlowLite;
@@ -34,6 +35,41 @@ public class HandTrackingSample : MonoBehaviour
 
     private Utilities utilities;
 
+    public bool left = false;
+    public bool right = false;
+    private bool up = false;
+    private bool down = false;
+
+    private IEnumerator HandPoseEstimation()
+    {
+        for (; ; )
+        {
+            left = false;
+            right = false;
+
+            float[] a = { landmarkResult.joints[5].x, landmarkResult.joints[5].y };
+            float[] b = { landmarkResult.joints[6].x, landmarkResult.joints[6].y };
+            float[] c = { landmarkResult.joints[7].x, landmarkResult.joints[7].y };
+            if (Mathf.Abs(utilities.CalculateAngle3Points(a, b, c) - 180) < 20)
+            {
+                if (landmarkResult.joints[5].x > landmarkResult.joints[7].x)
+                {
+                    left = true;
+                    yield return new WaitForSeconds(1.0f);
+                }
+
+                if (landmarkResult.joints[5].x < landmarkResult.joints[7].x)
+                {
+                    right = true;
+                    yield return new WaitForSeconds(1.0f);
+                }
+
+            }
+
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
+
     private void Start()
     {
         palmDetect = new PalmDetect(palmModelFile);
@@ -58,6 +94,8 @@ public class HandTrackingSample : MonoBehaviour
 
     private void Update()
     {
+        left = false;
+        right = false;
         if (palmResults != null && palmResults.Count > 0)
         {
             DrawFrames(palmResults);
@@ -67,13 +105,27 @@ public class HandTrackingSample : MonoBehaviour
         {
             DrawCropMatrix(landmarkDetect.CropMatrix);
             DrawJoints(landmarkResult.joints);
+            
 
             float[] a = { landmarkResult.joints[5].x, landmarkResult.joints[5].y };
             float[] b = { landmarkResult.joints[6].x, landmarkResult.joints[6].y };
             float[] c = { landmarkResult.joints[7].x, landmarkResult.joints[7].y };
-            // Debug.Log(utilities.CalculateAngle3Points(a, b, c));
-            Debug.Log(landmarkResult.joints[8].x);
+            if (Mathf.Abs(utilities.CalculateAngle3Points(a, b, c) - 180) < 20)
+            {
+                if (landmarkResult.joints[5].x > landmarkResult.joints[7].x)
+                {
+                    left = true;
+                }
+
+                if (landmarkResult.joints[5].x < landmarkResult.joints[7].x)
+                {
+                    right = true;
+                }
+
+            }
+
         }
+
     }
 
     private void OnTextureUpdate(Texture texture)
