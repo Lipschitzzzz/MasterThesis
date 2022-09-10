@@ -5,20 +5,21 @@ using UnityEngine.Android;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class MainSceneManager : MonoBehaviour
+public class MainSceneManager : MySceneManager
 {
     public GameObject videoPlayer;
     public GameObject canvas;
-    public GameObject audioManager;
     public GameObject playerInfo;
 
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
-        audioManager = GameObject.Find("AudioManager");
+        //audioManager = GameObject.Find("AudioManager");
         videoPlayer = GameObject.Find("VideoPlayer");
         playerInfo = GameObject.Find("PlayerInfo");
-        audioManager.GetComponent<AudioManager>().muteUnmuteButton = GameObject.Find("Mute");
+        //audioManager.GetComponent<AudioManager>().muteUnmuteButton = GameObject.Find("Mute");
+
+        base.Start();
 
         // the first time enter game
         if (playerInfo.GetComponent<PlayerInfo>().totalTime < 2.0f)
@@ -78,10 +79,10 @@ public class MainSceneManager : MonoBehaviour
     }
     
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
+        base.Update();
         PlayVideoOnlyOnce();
-
     }
 
     internal void PermissionCallbacks_PermissionDeniedAndDontAskAgain(string permissionName)
@@ -99,23 +100,5 @@ public class MainSceneManager : MonoBehaviour
         Debug.Log($"{permissionName} PermissionCallbacks_PermissionDenied");
     }
 
-    public void Mute()
-    {
-        audioManager.GetComponent<AudioManager>().Mute();
-    }
-
-    public void ClassicStart()
-    {
-        SceneManager.LoadScene("Classic");
-    }
-    public void Start2048()
-    {
-        SceneManager.LoadScene("2048");
-    }
-
-    public void GameQuit()
-    {
-        Application.Quit();
-    }
 
 }

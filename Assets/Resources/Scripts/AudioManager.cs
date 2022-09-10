@@ -94,6 +94,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void NextSong()
+    {
+        audioSource.Stop();
+        currentPlayingIndex = (currentPlayingIndex + 1) % audioClips.Length;
+        audioSource.clip = audioClips[currentPlayingIndex];
+        audioSource.Play();
+
+    }
+
     public string GetCurrentSongName()
     {
         return audioClips[currentPlayingIndex].name;

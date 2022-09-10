@@ -37,8 +37,8 @@ public class HandTrackingSample : MonoBehaviour
 
     public bool left = false;
     public bool right = false;
-    private bool up = false;
-    private bool down = false;
+    public bool up = false;
+    public bool down = false;
 
     private IEnumerator HandPoseEstimation()
     {
@@ -92,37 +92,57 @@ public class HandTrackingSample : MonoBehaviour
         landmarkDetect?.Dispose();
     }
 
+    private IEnumerator CalculateDirection()
+    {
+        float[] a = { landmarkResult.joints[5].x, landmarkResult.joints[5].y };
+        float[] b = { landmarkResult.joints[6].x, landmarkResult.joints[6].y };
+        float[] c = { landmarkResult.joints[7].x, landmarkResult.joints[7].y };
+        if (Mathf.Abs(utilities.CalculateAngle3Points(a, b, c) - 180) < 20)
+        {
+            float x = landmarkResult.joints[5].x - landmarkResult.joints[7].x;
+            float y = landmarkResult.joints[5].y - landmarkResult.joints[7].y;
+
+            if (x > 0 && Mathf.Abs(x) > Mathf.Abs(y))
+            {
+                left = true;
+            }
+
+            else if (x < 0 && Mathf.Abs(x) > Mathf.Abs(y))
+            {
+                right = true;
+            }
+            if (y < 0 && Mathf.Abs(x) < Mathf.Abs(y))
+            {
+                up = true;
+            }
+            if (y > 0 && Mathf.Abs(x) < Mathf.Abs(y))
+            {
+                down = true;
+            }
+
+        }
+
+        yield return null;
+    }
+
     private void Update()
     {
         left = false;
         right = false;
+        up = false;
+        down = false;
+
         if (palmResults != null && palmResults.Count > 0)
         {
             DrawFrames(palmResults);
         }
 
-        if (landmarkResult != null && landmarkResult.score > 0.2f)
+        if (landmarkResult != null && landmarkResult.score > 0.5f && palmResults.Count > 0)
         {
             DrawCropMatrix(landmarkDetect.CropMatrix);
             DrawJoints(landmarkResult.joints);
-            
 
-            float[] a = { landmarkResult.joints[5].x, landmarkResult.joints[5].y };
-            float[] b = { landmarkResult.joints[6].x, landmarkResult.joints[6].y };
-            float[] c = { landmarkResult.joints[7].x, landmarkResult.joints[7].y };
-            if (Mathf.Abs(utilities.CalculateAngle3Points(a, b, c) - 180) < 20)
-            {
-                if (landmarkResult.joints[5].x > landmarkResult.joints[7].x)
-                {
-                    left = true;
-                }
-
-                if (landmarkResult.joints[5].x < landmarkResult.joints[7].x)
-                {
-                    right = true;
-                }
-
-            }
+            StartCoroutine(CalculateDirection());
 
         }
 

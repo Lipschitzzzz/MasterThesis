@@ -404,6 +404,9 @@ public class Board : MonoBehaviour
         {
             bool left = handTrackingSample.GetComponent<HandTrackingSample>().left;
             bool right = handTrackingSample.GetComponent<HandTrackingSample>().right;
+            bool up = handTrackingSample.GetComponent<HandTrackingSample>().up;
+            bool down = handTrackingSample.GetComponent<HandTrackingSample>().down;
+
             if (state == State.WAIT)
             {
                 if (Input.GetKeyUp(KeyCode.RightArrow) || right)
@@ -415,12 +418,17 @@ public class Board : MonoBehaviour
                 {
                     MoveTo(Node.Direction.LEFT);
                 }
-                if (Input.GetKeyUp(KeyCode.UpArrow)) MoveTo(Node.Direction.UP);
-                if (Input.GetKeyUp(KeyCode.DownArrow)) MoveTo(Node.Direction.DOWN);
-            }
 
-            handTrackingSample.GetComponent<HandTrackingSample>().left = false;
-            handTrackingSample.GetComponent<HandTrackingSample>().right = false;
+                if (Input.GetKeyUp(KeyCode.UpArrow) || up) 
+                {
+                    MoveTo(Node.Direction.UP);
+                }
+
+                if (Input.GetKeyUp(KeyCode.DownArrow) || down)
+                {
+                    MoveTo(Node.Direction.DOWN);
+                }
+            }
             yield return new WaitForSeconds(1.0f);
 
         }
@@ -438,14 +446,16 @@ public class Board : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            handTrackingSample.GetComponent<HandTrackingSample>().up = false;
+            handTrackingSample.GetComponent<HandTrackingSample>().down = false;
             Show();
-            OnGameOver();
+            // OnGameOver();
         }
     }
 
     private void Start()
     {
-        // StartCoroutine(KeyPoseDetect());
+        StartCoroutine(KeyPoseDetect());
         CreateRandom();
     }
 }

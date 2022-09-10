@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class ClassicTimeManager : TimeManager
+
+public class TrainingSceneManager : MySceneManager
 {
     public GameObject[] gameObjects;
 
+    private float countdown;
     private bool longPressStart = false;
     private float pressedTime = 0;
     private PlayerInfo playerInfo;
-    
+
     protected IEnumerator UpdateCountdownBar()
     {
         while (true)
@@ -25,25 +27,28 @@ public class ClassicTimeManager : TimeManager
 
     }
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
-        // playerInfo = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
+        base.Start();
+        playerInfo = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>();
         countdown = 300.0f;
         StartCoroutine(UpdateCountdownBar());
+
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
+        base.Update();
         if (countdown < 0.0f)
         {
-            QuitClassic();
+            QuitTraining();
         }
         if (longPressStart)
         {
-            countdown -= 0.5f * 0.05f * (Time.time - pressedTime);
+            countdown -= 0.1f * (Time.time - pressedTime);
         }
-        // UpdateLevelBar();
+        UpdateLevelBar();
     }
 
     private void UpdateLevelBar()
@@ -58,7 +63,7 @@ public class ClassicTimeManager : TimeManager
     }
 
 
-    public void QuitClassic()
+    public void QuitTraining()
     {
         SceneManager.LoadScene("Main");
     }
