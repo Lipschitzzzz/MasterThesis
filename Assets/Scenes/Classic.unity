@@ -232,6 +232,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: ddeff6de7548d1747b9a1b4a9298c20a, type: 3}
   - {fileID: 2800000, guid: b7cd9a6ab699ea243a5091881bcf815c, type: 3}
   - {fileID: 2800000, guid: cd6e3e0da182a4c43bcb810cf1780aa1, type: 3}
+  currentPoseIndex: -1
+  matched: 0
 --- !u!1 &217456592
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,9 +285,9 @@ MonoBehaviour:
   quad: {fileID: 2330453598901006898, guid: 11a83d78f8ff3304485bc8f20db42bef, type: 3}
   poseManager: {fileID: 423210953}
   poseTextures:
-  - {fileID: 21300000, guid: 81458774dd145d24f8d81c80cf57c03f, type: 3}
-  - {fileID: 21300000, guid: e43aed850078d1c458c80bb49345b683, type: 3}
-  - {fileID: 21300000, guid: 0f5e3d70bdc89574bac2b8f8f846aea7, type: 3}
+  - {fileID: 21300000, guid: de1e4b666af780d4299aac7295a7636b, type: 3}
+  - {fileID: 21300000, guid: 485c9d3df28e0cd45b95f167e22b7ea1, type: 3}
+  - {fileID: 21300000, guid: dadb7c4eb569c0e43b9e87e9d2c173f5, type: 3}
   moveNet: {fileID: 86521801}
 --- !u!114 &217456595
 MonoBehaviour:

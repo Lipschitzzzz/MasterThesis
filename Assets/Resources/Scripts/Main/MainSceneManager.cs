@@ -7,19 +7,20 @@ using UnityEngine;
 
 public class MainSceneManager : MySceneManager
 {
-    public GameObject videoPlayer;
+    public GameObject videoManager;
     public GameObject canvas;
     public GameObject playerInfo;
 
     // Start is called before the first frame update
     new void Start()
     {
-        //audioManager = GameObject.Find("AudioManager");
-        videoPlayer = GameObject.Find("VideoPlayer");
-        playerInfo = GameObject.Find("PlayerInfo");
-        //audioManager.GetComponent<AudioManager>().muteUnmuteButton = GameObject.Find("Mute");
+        // base.Start(); 
+        audioManager = GameObject.Find("AudioManager");
+        audioManager.GetComponent<AudioManager>().muteUnmuteButton = GameObject.Find("Mute");
+        currentSongNameText.text = audioManager.GetComponent<AudioManager>().GetCurrentSongName();
 
-        base.Start();
+        videoManager = GameObject.Find("VideoManager");
+        playerInfo = GameObject.Find("PlayerInfo");
 
         // the first time enter game
         if (playerInfo.GetComponent<PlayerInfo>().totalTime < 2.0f)
@@ -33,7 +34,7 @@ public class MainSceneManager : MySceneManager
             Mute();
             Mute();
         }
-        
+
 
         if (Permission.HasUserAuthorizedPermission(Permission.Camera))
         {
@@ -64,25 +65,26 @@ public class MainSceneManager : MySceneManager
     private void PlayVideoOnlyOnce()
     {
         // other scenes are loading to main scene
-        if (videoPlayer == null)
+        if (videoManager == null)
         {
             return;
         }
         // the first time enter game
-        else if (playerInfo.GetComponent<PlayerInfo>().totalTime > 2.0f && !videoPlayer.GetComponent<VideoPlayer>().isPlaying)
+        else if (playerInfo.GetComponent<PlayerInfo>().totalTime > 2.0f && !videoManager.GetComponent<VideoPlayer>().isPlaying)
         {
             canvas.SetActive(true);
             audioManager.SetActive(true);
-            videoPlayer.gameObject.SetActive(false);
+            videoManager.gameObject.SetActive(false);
         }
 
     }
-    
+
     // Update is called once per frame
     new void Update()
     {
         base.Update();
         PlayVideoOnlyOnce();
+
     }
 
     internal void PermissionCallbacks_PermissionDeniedAndDontAskAgain(string permissionName)
@@ -99,6 +101,5 @@ public class MainSceneManager : MySceneManager
     {
         Debug.Log($"{permissionName} PermissionCallbacks_PermissionDenied");
     }
-
 
 }

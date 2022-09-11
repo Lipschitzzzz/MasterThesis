@@ -38,9 +38,9 @@ public class MySceneManager : MonoBehaviour
     // Start is called before the first frame update
     protected void Start()
     {
-        currentSongNameText.text = audioManager.GetComponent<AudioManager>().GetCurrentSongName();
         audioManager = GameObject.Find("AudioManager");
         audioManager.GetComponent<AudioManager>().muteUnmuteButton = GameObject.Find("Mute");
+        currentSongNameText.text = audioManager.GetComponent<AudioManager>().GetCurrentSongName();
 
         // double click the button. to correctly show the mute/unmute icon
         Mute();

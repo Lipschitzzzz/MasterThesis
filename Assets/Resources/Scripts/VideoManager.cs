@@ -6,7 +6,6 @@ using UnityEngine;
 public class VideoManager : MonoBehaviour
 {
     private static VideoManager instance = null;
-    public VideoPlayer videoPlayer;
 
     public static VideoManager Instance
     {
@@ -31,7 +30,16 @@ public class VideoManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        string filePath = Application.streamingAssetsPath + "/loading.mp4";
+#if UNITY_EDITOR
+        filePath = Application.streamingAssetsPath + "/loading.mp4";
+#elif UNITY_ANDROID
+        filePath = "jar:file://" + Application.dataPath + "!/assets/loading.mp4";
+#else
+        filePath = Application.streamingAssetsPath + "/loading.mp4";
+#endif
+        this.GetComponent<VideoPlayer>().url = filePath;
+        this.GetComponent<VideoPlayer>().Play();
     }
 
     // Update is called once per frame

@@ -14,7 +14,7 @@ public class Utilities : MonoBehaviour
     {
         if (a.Length != 2 || b.Length != 2 || c.Length != 2 || d.Length != 2)
         {
-            Debug.Log("calculate_angle_3_points array dimension is incorrect");
+            Debug.Log("calculate_angle_4_points array dimension is incorrect");
             return 0.0f;
         }
 

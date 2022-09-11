@@ -380,10 +380,8 @@ public class MoveNetSinglePose : MonoBehaviour
                 float line1 = Mathf.Abs(results[pointIndex2].y - results[pointIndex3].y);
 
                 float tolerance = line1 * proportion;
-                Color color = new Color(1.0f, 0.0f, 0.0f);
                 if (line0 < tolerance)
                 {
-                    color = new Color(0.0f, 1.0f, 0.0f);
                     matched.Add(true);
                 }
                 else

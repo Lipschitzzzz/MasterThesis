@@ -34,13 +34,16 @@ public class ClassicSceneManager : MySceneManager
             if (poseIndex == 0)
             {
                 poseArmPrayerStretch.Add(tem);
+                tem.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.25f, 0.0f);
             }
             else if (poseIndex == 1)
             {
+                tem.GetComponent<SpriteRenderer>().color = new Color(0.35f, 0.75f, 1.0f);
                 poseLatissimusDorsiMuscleStretch.Add(tem);
             }
             else if (poseIndex == 2)
             {
+                tem.GetComponent<SpriteRenderer>().color = new Color(0.0f, 1.0f, 0.5f);
                 poseUpperTrapStretchRight.Add(tem);
             }
             else
@@ -56,23 +59,36 @@ public class ClassicSceneManager : MySceneManager
     {
         for(;;)
         {
-            if (moveNet.GetComponent<ClassicMoveNet>().matched && poseArmPrayerStretch.Count > 0 && moveNet.GetComponent<ClassicMoveNet>().currentPoseIndex == 0)
+            if (moveNet.GetComponent<ClassicMoveNet>().matched && moveNet.GetComponent<ClassicMoveNet>().currentPoseIndex == 0 && poseArmPrayerStretch.Count > 0)
             {
                 Destroy(poseArmPrayerStretch[0]);
                 poseArmPrayerStretch.RemoveAt(0);
+                // play animation()
+                yield return new WaitForSeconds(1.5f);
             }
-            if (moveNet.GetComponent<ClassicMoveNet>().matched && poseArmPrayerStretch.Count > 0 && moveNet.GetComponent<ClassicMoveNet>().currentPoseIndex == 1)
+            if (moveNet.GetComponent<ClassicMoveNet>().matched && moveNet.GetComponent<ClassicMoveNet>().currentPoseIndex == 1 && poseArmPrayerStretch.Count > 0)
             {
                 Destroy(poseLatissimusDorsiMuscleStretch[0]);
                 poseLatissimusDorsiMuscleStretch.RemoveAt(0);
+                // play animation()
+                yield return new WaitForSeconds(1.5f);
             }
-            if (moveNet.GetComponent<ClassicMoveNet>().matched && poseArmPrayerStretch.Count > 0 && moveNet.GetComponent<ClassicMoveNet>().currentPoseIndex == 2)
+            if (moveNet.GetComponent<ClassicMoveNet>().matched && moveNet.GetComponent<ClassicMoveNet>().currentPoseIndex == 2 && poseArmPrayerStretch.Count > 0)
             {
                 Destroy(poseUpperTrapStretchRight[0]);
                 poseUpperTrapStretchRight.RemoveAt(0);
+                // play animation()
+                yield return new WaitForSeconds(1.5f);
             }
-
-            yield return new WaitForSeconds(0.5f);
+            
+            if (Input.GetKey("1") && poseArmPrayerStretch.Count > 0)
+            {
+                Destroy(poseArmPrayerStretch[0]);
+                poseArmPrayerStretch.RemoveAt(0);
+                // play animation()
+                yield return new WaitForSeconds(1.5f);
+            }
+            yield return new WaitForSeconds(0.1f);
 
         }
     }

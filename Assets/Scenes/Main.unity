@@ -155,7 +155,7 @@ MonoBehaviour:
   audioManager: {fileID: 1374951726}
   cameraTexture: {fileID: 0}
   currentSongNameText: {fileID: 511076426}
-  videoPlayer: {fileID: 189484921}
+  videoManager: {fileID: 0}
   canvas: {fileID: 80322753}
   playerInfo: {fileID: 0}
 --- !u!4 &44362252
@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 189484922}
   - component: {fileID: 189484924}
   m_Layer: 0
-  m_Name: VideoPlayer
+  m_Name: VideoManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -434,7 +434,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8aef48d2900004ba17f79d07b9a0e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoPlayer: {fileID: 189484922}
 --- !u!1 &262114595 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4361518947610900009, guid: c354ea71afdcf884f82fa00beb0d53d7,
