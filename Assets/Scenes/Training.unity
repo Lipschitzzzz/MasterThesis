@@ -2764,6 +2764,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: ddeff6de7548d1747b9a1b4a9298c20a, type: 3}
   - {fileID: 2800000, guid: b7cd9a6ab699ea243a5091881bcf815c, type: 3}
   - {fileID: 2800000, guid: cd6e3e0da182a4c43bcb810cf1780aa1, type: 3}
+  currentPoseIndex: -1
+  matched: 0
 --- !u!114 &1884092455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2782,6 +2784,8 @@ MonoBehaviour:
   runBackground: 0
   left: 0
   right: 0
+  up: 0
+  down: 0
 --- !u!114 &1884092456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2833,7 +2837,15 @@ MonoBehaviour:
   figure: {fileID: 1597468393}
   textures:
   - {fileID: 2800000, guid: ddeff6de7548d1747b9a1b4a9298c20a, type: 3}
-  - {fileID: 2800000, guid: b7cd9a6ab699ea243a5091881bcf815c, type: 3}
+  - {fileID: 2800000, guid: b7fabebd181517f40ae80ed9db187301, type: 3}
+  - {fileID: 2800000, guid: bb37637e7f130314c9e04da52502997d, type: 3}
+  - {fileID: 2800000, guid: a560fbdb6c0561044bd9c72f86586e82, type: 3}
+  - {fileID: 2800000, guid: cd6e3e0da182a4c43bcb810cf1780aa1, type: 3}
+  - {fileID: 2800000, guid: a0d1e9a7b0a661044a2c5965d5e860ba, type: 3}
+  - {fileID: 2800000, guid: ddeff6de7548d1747b9a1b4a9298c20a, type: 3}
+  - {fileID: 2800000, guid: bb37637e7f130314c9e04da52502997d, type: 3}
+  - {fileID: 2800000, guid: b7fabebd181517f40ae80ed9db187301, type: 3}
+  - {fileID: 2800000, guid: a560fbdb6c0561044bd9c72f86586e82, type: 3}
   - {fileID: 2800000, guid: cd6e3e0da182a4c43bcb810cf1780aa1, type: 3}
 --- !u!1 &1989470205
 GameObject:

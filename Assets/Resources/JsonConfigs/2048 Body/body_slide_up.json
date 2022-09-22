@@ -1,0 +1,67 @@
+{
+  "poseIndex": 5,
+  "poseName": "body_slide_up",
+  "poseDetectValueArray":
+  [
+    {
+      "type": "vertical",
+      "points": "9-0",
+      "value": 0,
+      "comment": "the y coordinate of point 9 should be over (under) the y coordinate of point 0 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "9-1",
+      "value": 0,
+      "comment": "the y coordinate of point 9 should be over (under) the y coordinate of point 1 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "9-2",
+      "value": 0,
+      "comment": "the y coordinate of point 9 should be over (under) the y coordinate of point 2 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "9-3",
+      "value": 0,
+      "comment": "the y coordinate of point 9 should be over (under) the y coordinate of point 3 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "9-4",
+      "value": 0,
+      "comment": "the y coordinate of point 9 should be over (under) the y coordinate of point 4 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "10-0",
+      "value": 0,
+      "comment": "the y coordinate of point 10 should be over (under) the y coordinate of point 0 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "10-1",
+      "value": 0,
+      "comment": "the y coordinate of point 10 should be over (under) the y coordinate of point 1 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "10-2",
+      "value": 0,
+      "comment": "the y coordinate of point 10 should be over (under) the y coordinate of point 2 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "10-3",
+      "value": 0,
+      "comment": "the y coordinate of point 10 should be over (under) the y coordinate of point 3 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "10-4",
+      "value": 0,
+      "comment": "the y coordinate of point 10 should be over (under) the y coordinate of point 4 because of the value = 0 (1)"
+    }
+  ]
+}

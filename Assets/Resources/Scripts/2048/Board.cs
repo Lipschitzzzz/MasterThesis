@@ -25,7 +25,8 @@ public class Board : MonoBehaviour
             return _inst;
         }
     } 
-    private static Board _inst; 
+    private static Board _inst;
+    private int currentMaxValue = 0;
     public List<NodeObject> realNodeList = new List<NodeObject>(); 
     public List<Node> nodeData = new List<Node>();
     public Dictionary<Vector2Int, Node> nodeMap = new Dictionary<Vector2Int, Node>();
@@ -36,6 +37,7 @@ public class Board : MonoBehaviour
     public RectTransform emptyNodeRect;
     public RectTransform realNodeRect;
     public GameObject handTrackingSample;
+    public GameObject moveNetSample;
     public GameObject gameOverPanel;
 
     public void EnableGameOverPanel(bool enable)
@@ -126,6 +128,15 @@ public class Board : MonoBehaviour
             from.realNodeObj.CombineToNode(from, to);
             from.realNodeObj = null;
             to.combined = true;
+        }
+
+        foreach (var i in nodeData)
+        {
+            if (i.value > currentMaxValue) currentMaxValue = (int)i.value;
+        }
+        if( currentMaxValue == 128)
+        {
+            OnGameOver();
         }
     }
 
@@ -398,7 +409,7 @@ public class Board : MonoBehaviour
 
     }
 
-    private IEnumerator KeyPoseDetect()
+    private IEnumerator KeyPoseDetectHand()
     {
         for(;;)
         {
@@ -435,6 +446,43 @@ public class Board : MonoBehaviour
 
     }
 
+    private IEnumerator KeyPoseDetectBody()
+    {
+        for (; ; )
+        {
+            bool left = moveNetSample.GetComponent<MoveNet2048>().left;
+            bool right = moveNetSample.GetComponent<MoveNet2048>().right;
+            bool up = moveNetSample.GetComponent<MoveNet2048>().up;
+            bool down = moveNetSample.GetComponent<MoveNet2048>().down;
+
+            if (state == State.WAIT)
+            {
+                if (Input.GetKeyUp(KeyCode.RightArrow) || right)
+                {
+                    MoveTo(Node.Direction.RIGHT);
+                }
+
+                if (Input.GetKeyUp(KeyCode.LeftArrow) || left)
+                {
+                    MoveTo(Node.Direction.LEFT);
+                }
+
+                if (Input.GetKeyUp(KeyCode.UpArrow) || up)
+                {
+                    MoveTo(Node.Direction.UP);
+                }
+
+                if (Input.GetKeyUp(KeyCode.DownArrow) || down)
+                {
+                    MoveTo(Node.Direction.DOWN);
+                }
+            }
+            yield return new WaitForSeconds(1.0f);
+
+        }
+
+    }
+
     private void Update()
     {
         UpdateState();
@@ -446,17 +494,30 @@ public class Board : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            handTrackingSample.GetComponent<HandTrackingSample>().up = false;
-            handTrackingSample.GetComponent<HandTrackingSample>().down = false;
+            // handTrackingSample.GetComponent<HandTrackingSample>().up = false;
+            // handTrackingSample.GetComponent<HandTrackingSample>().down = false;
             Show();
             // OnGameOver();
         }
+
     }
 
     private void Start()
     {
-        StartCoroutine(KeyPoseDetect());
+        if (SceneManager.GetActiveScene().name == "2048Hand")
+        {
+            StartCoroutine(KeyPoseDetectHand());
+        }
+        else if(SceneManager.GetActiveScene().name == "2048Body")
+        {
+            StartCoroutine(KeyPoseDetectBody());
+        }
+        else
+        {
+            Debug.LogError("unknown scene");
+        }
         CreateRandom();
+
     }
 }
  

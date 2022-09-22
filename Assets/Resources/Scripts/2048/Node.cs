@@ -23,7 +23,7 @@ public class  Node
         UP = 3
     } 
     public int? value = null; 
-    public Vector2Int point; 
+    public Vector2Int point;
     public Vector2 position;
     public bool combined = false;
     public Vector2Int?[] linkedNode = null; 

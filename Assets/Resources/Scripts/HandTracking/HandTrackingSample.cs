@@ -111,11 +111,11 @@ public class HandTrackingSample : MonoBehaviour
             {
                 right = true;
             }
-            if (y < 0 && Mathf.Abs(x) < Mathf.Abs(y))
+            else if(y < 0 && Mathf.Abs(x) < Mathf.Abs(y))
             {
                 up = true;
             }
-            if (y > 0 && Mathf.Abs(x) < Mathf.Abs(y))
+            else if(y > 0 && Mathf.Abs(x) < Mathf.Abs(y))
             {
                 down = true;
             }

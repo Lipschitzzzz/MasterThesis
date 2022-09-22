@@ -11,12 +11,6 @@
       },
       {
         "type": "angle",
-        "points": "5-7-9",
-        "value": 180,
-        "comment": "the angle between 5-7-9 should be close to 180 degree"
-      },
-      {
-        "type": "angle",
         "points": "6-5-7",
         "value": 100,
         "comment": "the angle between 6-5-7 should be close to 100 degree"

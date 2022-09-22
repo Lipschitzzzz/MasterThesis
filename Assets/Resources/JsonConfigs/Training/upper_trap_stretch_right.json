@@ -1,0 +1,67 @@
+{
+  "poseIndex": 4,
+  "poseName": "upper_trap_stretch_right",
+  "poseDetectValueArray":
+  [
+    {
+      "type": "angle",
+      "points": "5-7-9",
+      "value": 90,
+      "comment": "the angle between 5-7-9 should be close to 90 degree"
+    },
+    {
+      "type": "angle",
+      "points": "5-6-8",
+      "value": 100,
+      "comment": "the angle between 5-6-8 should be close to 100 degree"
+    },
+    {
+      "type": "vertical",
+      "points": "7-5",
+      "value": 0,
+      "comment": "the y coordinate of point 8 should be over (under) the y coordinate of point 6 because of the value = 0 (1)"
+    },
+    {
+      "type": "horizontal",
+      "points": "5-7",
+      "value": 0,
+      "comment": "the x coordinate of point 5 should be left (right) the x coordinate of point 7 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "9-7",
+      "value": 0,
+      "comment": "the y coordinate of point 9 should be over (under) the y coordinate of point 7 because of the value = 0 (1)"
+    },
+    {
+      "type": "horizontal",
+      "points": "9-7",
+      "value": 0,
+      "comment": "the x coordinate of point 9 should be left (right) the x coordinate of point 7 because of the value = 0 (1)"
+    },
+    {
+      "type": "horizontal",
+      "points": "9-5",
+      "value": 0,
+      "comment": "the x coordinate of point 9 should be left (right) the x coordinate of point 5 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "6-8",
+      "value": 0,
+      "comment": "the y coordinate of point 6 should be over (under) the y coordinate of point 8 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "4-3",
+      "value": 0,
+      "comment": "the y coordinate of point 4 should be over (under) the y coordinate of point 3 because of the value = 0 (1)"
+    },
+    {
+      "type": "vector",
+      "points": "4-3-5-6",
+      "value": 150,
+      "comment": "the angle between vector 3 -> 4 and vector 6 -> 5 should be close to 150 degree"
+    }
+  ]
+}

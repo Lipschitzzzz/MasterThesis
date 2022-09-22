@@ -1,0 +1,97 @@
+{
+  "poseIndex": 3,
+  "poseName": "LatissimusDorsiMuscleStretch-horizontal flip",
+  "poseDetectValueArray":
+  [
+    {
+      "type": "angle",
+      "points": "6-8-10",
+      "value": 90,
+      "comment": "the angle between 5-7-9 should be close to 90 degree"
+    },
+    {
+      "type": "angle",
+      "points": "8-6-5",
+      "value": 170,
+      "comment": "the angle between 7-5-6 should be close to 170 degree"
+    },
+    {
+      "type": "angle",
+      "points": "5-7-9",
+      "value": 170,
+      "comment": "the angle between 6-8-10 should be close to 170 degree"
+    },
+    {
+      "type": "angle",
+      "points": "11-5-7",
+      "value": 170,
+      "comment": "the angle between 12-6-8 should be close to 170 degree"
+    },
+    {
+      "type": "angle",
+      "points": "6-5-7",
+      "value": 100,
+      "comment": "the angle between 5-6-8 should be close to 170 degree"
+    },
+    {
+      "type": "vertical",
+      "points": "7-5",
+      "value": 0,
+      "comment": "the y coordinate of point 8 should be over (under) the y coordinate of point 6 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "9-5",
+      "value": 0,
+      "comment": "the y coordinate of point 10 should be over (under) the y coordinate of point 6 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "3-2",
+      "value": 0,
+      "comment": "the y coordinate of point 4 should be over (under) the y coordinate of point 1 because of the value = 0 (1)"
+    },
+    {
+      "type": "horizontal",
+      "points": "7-5",
+      "value": 0,
+      "comment": "the x coordinate of point 6 should be left (right) the x coordinate of point 8 because of the value = 0 (1)"
+    },
+    {
+      "type": "horizontal",
+      "points": "9-5",
+      "value": 0,
+      "comment": "the x coordinate of point 6 should be left (right) the x coordinate of point 10 because of the value = 0 (1)"
+    },
+    {
+      "type": "horizontal",
+      "points": "0-7",
+      "value": 0,
+      "comment": "the x coordinate of point 8 should be left (right) the x coordinate of point 0 because of the value = 0 (1)"
+    },
+    {
+      "type": "horizontal",
+      "points": "2-7",
+      "value": 0,
+      "comment": "the x coordinate of point 8 should be left (right) the x coordinate of point 1 because of the value = 0 (1)"
+    },
+    {
+      "type": "horizontal",
+      "points": "1-7",
+      "value": 0,
+      "comment": "the x coordinate of point 8 should be left (right) the x coordinate of point 2 because of the value = 0 (1)"
+    },
+    {
+      "type": "horizontal",
+      "points": "4-7",
+      "value": 0,
+      "comment": "the x coordinate of point 8 should be left (right) the x coordinate of point 3 because of the value = 0 (1)"
+    },
+    {
+      "type": "horizontal",
+      "points": "3-7",
+      "value": 0,
+      "comment": "the x coordinate of point 8 should be left (right) the x coordinate of point 4 because of the value = 0 (1)"
+    }
+  ]
+}

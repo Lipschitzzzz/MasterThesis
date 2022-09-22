@@ -235,6 +235,10 @@ public class MoveNetSinglePose : MonoBehaviour
                         }
                         matched.Add(false);
                     }
+                    else
+                    {
+                        matched.Add(true);
+                    }
                 }
                 else if (value == 1)
                 {
@@ -247,6 +251,10 @@ public class MoveNetSinglePose : MonoBehaviour
                             DrawResult(results);
                         }
                         matched.Add(false);
+                    }
+                    else
+                    {
+                        matched.Add(true);
                     }
                 }
                 else
@@ -279,6 +287,10 @@ public class MoveNetSinglePose : MonoBehaviour
                         }
                         matched.Add(false);
                     }
+                    else
+                    {
+                        matched.Add(true);
+                    }
                 }
                 else if (value == 1)
                 {
@@ -291,6 +303,10 @@ public class MoveNetSinglePose : MonoBehaviour
                             DrawResult(results);
                         }
                         matched.Add(false);
+                    }
+                    else
+                    {
+                        matched.Add(true);
                     }
                 }
                 else

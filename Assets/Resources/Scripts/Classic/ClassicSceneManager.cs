@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class ClassicSceneManager : MySceneManager
 {
-    // -8.5 <= x <= 8.5
-    // -2.0 <= y <= 5.0
-
     public List<GameObject> poseQuadObjects;
 
     public GameObject quad;
@@ -24,10 +21,10 @@ public class ClassicSceneManager : MySceneManager
     {
         for (; ; )
         {
-            float x = Random.Range(-800.0f, 300.0f);
-            float y = Random.Range(-160.0f, 300.0f);
+            float x = Random.Range(-70.0f, 20.0f);
+            float y = Random.Range(-5.0f, 30.0f);
 
-            GameObject tem = Instantiate(quad, new Vector3(-50f, 0f, 0.0f), Quaternion.identity, poseManager.transform);
+            GameObject tem = Instantiate(quad, new Vector3(x, y, 0.0f), Quaternion.identity, poseManager.transform);
             tem.transform.Rotate(new Vector3(0, 0, 31), Space.Self);
             int poseIndex = Random.Range(0, poseTextures.Count);
             tem.GetComponent<SpriteRenderer>().sprite = poseTextures[poseIndex];
@@ -50,7 +47,7 @@ public class ClassicSceneManager : MySceneManager
             {
                 Debug.Log("Unknown Pose Index");
             }
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(1.0f);
         }
 
     }

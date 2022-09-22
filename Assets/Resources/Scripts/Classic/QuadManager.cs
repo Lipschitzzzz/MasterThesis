@@ -12,16 +12,20 @@ public class QuadManager : MonoBehaviour
         }
     }
 
+    private void DestroyDelay(float delay)
+    {
+        Destroy(this.gameObject, delay);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        DestroyDelay(3.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
