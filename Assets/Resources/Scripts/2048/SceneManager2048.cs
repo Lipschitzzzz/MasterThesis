@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SceneManager2048 : MySceneManager
 {
+    public GameObject instruction;
+
     // Start is called before the first frame update
     new void Start()
     {
@@ -17,5 +19,9 @@ public class SceneManager2048 : MySceneManager
         base.Update();
     }
 
+    public void EnableInstruction()
+    {
+        instruction.SetActive(!instruction.gameObject.activeSelf);
+    }
 
 }

@@ -4,64 +4,76 @@
   "poseDetectValueArray":
   [
     {
-      "type": "vertical",
-      "points": "9-0",
-      "value": 0,
-      "comment": "the y coordinate of point 9 should be over (under) the y coordinate of point 0 because of the value = 0 (1)"
+      "type": "angle",
+      "points": "7-5-6",
+      "value": 90,
+      "comment": "the angle between 7-5-6 should be close to 90 degree"
+    },
+    {
+      "type": "angle",
+      "points": "8-6-5",
+      "value": 90,
+      "comment": "the angle between 8-6-5 should be close to 90 degree"
     },
     {
       "type": "vertical",
-      "points": "9-1",
+      "points": "8-0",
       "value": 0,
-      "comment": "the y coordinate of point 9 should be over (under) the y coordinate of point 1 because of the value = 0 (1)"
+      "comment": "the y coordinate of point 8 should be over (under) the y coordinate of point 0 because of the value = 0 (1)"
     },
     {
       "type": "vertical",
-      "points": "9-2",
+      "points": "8-1",
       "value": 0,
-      "comment": "the y coordinate of point 9 should be over (under) the y coordinate of point 2 because of the value = 0 (1)"
+      "comment": "the y coordinate of point 8 should be over (under) the y coordinate of point 1 because of the value = 0 (1)"
     },
     {
       "type": "vertical",
-      "points": "9-3",
+      "points": "8-2",
       "value": 0,
-      "comment": "the y coordinate of point 9 should be over (under) the y coordinate of point 3 because of the value = 0 (1)"
+      "comment": "the y coordinate of point 8 should be over (under) the y coordinate of point 2 because of the value = 0 (1)"
     },
     {
       "type": "vertical",
-      "points": "9-4",
+      "points": "8-3",
       "value": 0,
-      "comment": "the y coordinate of point 9 should be over (under) the y coordinate of point 4 because of the value = 0 (1)"
+      "comment": "the y coordinate of point 8 should be over (under) the y coordinate of point 3 because of the value = 0 (1)"
     },
     {
       "type": "vertical",
-      "points": "10-0",
+      "points": "8-4",
       "value": 0,
-      "comment": "the y coordinate of point 10 should be over (under) the y coordinate of point 0 because of the value = 0 (1)"
+      "comment": "the y coordinate of point 8 should be over (under) the y coordinate of point 4 because of the value = 0 (1)"
     },
     {
       "type": "vertical",
-      "points": "10-1",
+      "points": "7-0",
       "value": 0,
-      "comment": "the y coordinate of point 10 should be over (under) the y coordinate of point 1 because of the value = 0 (1)"
+      "comment": "the y coordinate of point 7 should be over (under) the y coordinate of point 0 because of the value = 0 (1)"
     },
     {
       "type": "vertical",
-      "points": "10-2",
+      "points": "7-1",
       "value": 0,
-      "comment": "the y coordinate of point 10 should be over (under) the y coordinate of point 2 because of the value = 0 (1)"
+      "comment": "the y coordinate of point 7 should be over (under) the y coordinate of point 1 because of the value = 0 (1)"
     },
     {
       "type": "vertical",
-      "points": "10-3",
+      "points": "7-2",
       "value": 0,
-      "comment": "the y coordinate of point 10 should be over (under) the y coordinate of point 3 because of the value = 0 (1)"
+      "comment": "the y coordinate of point 7 should be over (under) the y coordinate of point 2 because of the value = 0 (1)"
     },
     {
       "type": "vertical",
-      "points": "10-4",
+      "points": "7-3",
       "value": 0,
-      "comment": "the y coordinate of point 10 should be over (under) the y coordinate of point 4 because of the value = 0 (1)"
+      "comment": "the y coordinate of point 7 should be over (under) the y coordinate of point 3 because of the value = 0 (1)"
+    },
+    {
+      "type": "vertical",
+      "points": "7-4",
+      "value": 0,
+      "comment": "the y coordinate of point 7 should be over (under) the y coordinate of point 4 because of the value = 0 (1)"
     }
   ]
 }

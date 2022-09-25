@@ -8,7 +8,13 @@ public class MySceneManager : MonoBehaviour
 {
     public GameObject audioManager;
     public GameObject cameraTexture;
+    public TextMeshProUGUI fpsLabel;
     public TextMeshProUGUI currentSongNameText;
+    float updateInterval = 0.4f;
+    float accumulation = 0.0f;
+    int frames = 0;
+    string fpsString;
+
     public void Mute()
     {
         audioManager.GetComponent<AudioManager>().Mute();
@@ -21,6 +27,8 @@ public class MySceneManager : MonoBehaviour
 
     public virtual void LoadScene(string sceneName)
     {
+        accumulation = 0.0f;
+        frames = 0;
         SceneManager.LoadScene(sceneName);
     }
 
@@ -46,12 +54,38 @@ public class MySceneManager : MonoBehaviour
         Mute();
         Mute();
 
+        StartCoroutine(RefreshFPSLabel());
+    }
+
+    private void UpdateFPS()
+    {
+        frames++;
+        accumulation += Time.deltaTime;
+
+        float fps = frames / accumulation;
+        float milliSecond = accumulation * 1000 / frames;
+        fpsString = string.Format("{0:0.0} ms / frame {1:0.0} fps", milliSecond, fps);
+
+        frames = 0;
+        accumulation = 0.0f;
+
+    }
+
+    public IEnumerator RefreshFPSLabel()
+    {
+        for(;;)
+        {
+            fpsLabel.text = fpsString;
+            yield return new WaitForSeconds(0.5f);
+        }
+
     }
 
     // Update is called once per frame
     protected void Update()
     {
         currentSongNameText.text = audioManager.GetComponent<AudioManager>().GetCurrentSongName();
+        UpdateFPS();
 
     }
 }
