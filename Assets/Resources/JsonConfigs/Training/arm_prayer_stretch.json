@@ -22,6 +22,12 @@
       "comment": "the x coordinate distance between 9-10 should be <= the x coordinate distance between 5-6 * 0.35"
     },
     {
+      "type": "y_relative_distance",
+      "points": "9-10-5-6",
+      "value": 0.35,
+      "comment": "the y coordinate distance between 9-10 should be <= the y coordinate distance between 5-6 * 0.35"
+    },
+    {
       "type": "vertical",
       "points": "5-9",
       "value": 0,

@@ -18,14 +18,14 @@
     {
       "type": "angle",
       "points": "6-8-10",
-      "value": 170,
-      "comment": "the angle between 6-8-10 should be close to 170 degree"
+      "value": 150,
+      "comment": "the angle between 6-8-10 should be close to 150 degree"
     },
     {
       "type": "angle",
       "points": "5-6-8",
       "value": 100,
-      "comment": "the angle between 5-6-8 should be close to 170 degree"
+      "comment": "the angle between 5-6-8 should be close to 100 degree"
     },
     {
       "type": "vertical",

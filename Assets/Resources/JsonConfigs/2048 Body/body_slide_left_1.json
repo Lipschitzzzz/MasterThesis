@@ -24,8 +24,8 @@
     {
       "type": "angle",
       "points": "6-5-7",
-      "value": 90,
-      "comment": "the angle between 6-5-7 should be close to 90 degree"
+      "value": 100,
+      "comment": "the angle between 6-5-7 should be close to 100 degree"
     },
     {
       "type": "vertical",

@@ -119,7 +119,6 @@ public class HandTrackingSample : MonoBehaviour
             {
                 down = true;
             }
-
         }
 
         yield return null;

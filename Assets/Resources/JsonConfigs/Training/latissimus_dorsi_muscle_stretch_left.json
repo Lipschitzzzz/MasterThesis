@@ -24,8 +24,8 @@
     {
       "type": "angle",
       "points": "6-5-7",
-      "value": 90,
-      "comment": "the angle between 6-5-7 should be close to 90 degree"
+      "value": 100,
+      "comment": "the angle between 6-5-7 should be close to 100 degree"
     },
     {
       "type": "vertical",
@@ -65,27 +65,27 @@
     },
     {
       "type": "horizontal",
-      "points": "2-7",
-      "value": 0,
-      "comment": "the x coordinate of point 2 should be left (right) the x coordinate of point 7 because of the value = 0 (1)"
-    },
-    {
-      "type": "horizontal",
       "points": "1-7",
       "value": 0,
       "comment": "the x coordinate of point 1 should be left (right) the x coordinate of point 7 because of the value = 0 (1)"
     },
     {
       "type": "horizontal",
-      "points": "4-7",
+      "points": "2-7",
       "value": 0,
-      "comment": "the x coordinate of point 4 should be left (right) the x coordinate of point 7 because of the value = 0 (1)"
+      "comment": "the x coordinate of point 2 should be left (right) the x coordinate of point 7 because of the value = 0 (1)"
     },
     {
       "type": "horizontal",
       "points": "3-7",
       "value": 0,
       "comment": "the x coordinate of point 3 should be left (right) the x coordinate of point 7 because of the value = 0 (1)"
+    },
+    {
+      "type": "horizontal",
+      "points": "4-7",
+      "value": 0,
+      "comment": "the x coordinate of point 4 should be left (right) the x coordinate of point 7 because of the value = 0 (1)"
     },
     {
       "type": "vector",
